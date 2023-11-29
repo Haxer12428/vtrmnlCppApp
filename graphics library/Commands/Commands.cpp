@@ -214,10 +214,28 @@ const std::filesystem::path Commands::AddRoute(
 	return path;
 };
 
+void* Commands::fCopy(Window*& Obj, Window::CommandArguments Arguments)
+{
+	std::filesystem::path _FROM = Commands::AddRoute(Arguments.List[0]);
+	std::filesystem::path _TO = Commands::AddRoute(Arguments.List[1]);
+
+	if (
+		!std::filesystem::is_regular_file(_FROM)
+		) throw std::exception("static void* Commands::fCopy -> Function terminated");
+
+	bool Response = std::filesystem::copy_file(_FROM, _TO);
+
+	if (
+		!Response
+		) throw std::exception("static void* Commands::fCopy -> Function terminated, unknown error occured");
+
+	return 0; 
+}
+
 
 Commands::Commands(Window*& obj) : WindowObject(obj)
 {
-	//obj->PushCommand(Commands::Ping, "Ping", std::vector<std::string>());
+	obj->PushCommand(Commands::fCopy, "fCopy", std::vector<std::string>{"`fCopy", "  *Command used to copy file", "  *Must be used with arguments: [from: std::filesystem::path, to: std::filesystem::path]"});
 
 	obj->PushCommand(Commands::Route, "Route", std::vector<std::string>{"`Route", "  *Command used to help with file paths", "  *Can be used with arguments: [print: none | set: std::filesystem::path]"});
 

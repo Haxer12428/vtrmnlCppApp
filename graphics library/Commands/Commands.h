@@ -75,7 +75,9 @@ public:
 
 	static void* Route(Window*& Obj, Window::CommandArguments);
 
-	static void* Ping(Window*& Obj, Window::CommandArguments Arguments);
+	//static void* Ping(Window*& Obj, Window::CommandArguments Arguments);
+
+	static void* fCopy(Window*& Obj, Window::CommandArguments Arguments);
 
 	Commands(Window*& Window);
 
