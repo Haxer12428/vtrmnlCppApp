@@ -27,27 +27,44 @@ public:
 	{
 	public:
 		CommandFunc(
-			void* (*vFunc)(Window*&, CommandArguments), const std::string& AssignedName
-		) : AssignedFunction(vFunc), AssignedName(AssignedName)
+			void* (*vFunc)(Window*&, CommandArguments), const std::string& AssignedName, const std::vector<std::string> &AssignedHelp 
+		) : AssignedFunction(vFunc), AssignedName(AssignedName), AssignedHelp(AssignedHelp)
 		{}
 
-		void* AssignedFunction; const std::string AssignedName;
+		void* AssignedFunction; const std::string AssignedName; std::vector<std::string> AssignedHelp;
 	};
+
+	void PushBufferInVector(
+		const std::vector<std::string>& buffer
+	);
 
 	void PushBuffer(
 		const std::string& buffer
 	);
 
+	const std::vector<CommandFunc>& GetTerminalAssignedCommands();
+
 	void NewLine();
 
 	void PushCommand(
-		void* (*vFunc)(Window*&, CommandArguments), const std::string& vFuncName
+		void* (*vFunc)(Window*&, CommandArguments), const std::string& vFuncName, const std::vector<std::string> &CommandHelpBuffer
+	);
+
+	void RunHistory(
+		const int& position
 	);
 
 	void ClearTerminalBuffer();
 
+	std::vector<std::string> GetTerminalCommandHistoryBuffer(
+		const size_t &lenght = INT64_MAX
+	);
+
 private:
 	//Vars 
+	std::vector <
+		std::string> TerminalCommandHistoryBuffer;
+
 	std::vector<
 		CommandFunc> TerminalAssignedCommands;
 
@@ -62,6 +79,7 @@ private:
 	std::string UserInputBuffer = "";
 
 	long BufferPushCount = 0;
+	float BufferScrollOnLastUpdate = 0; 
 
 	//Render
 
@@ -76,6 +94,12 @@ private:
 	void RenderVerticalScrollbar();
 
 	//Handle 
+	void InitializeBuffer();
+
+	void UpdateHistoryBuffer(
+		const std::string& Buffer
+	);
+
 	void HandleBufferScrollIdle(
 		wxIdleEvent& evt
 	);
@@ -92,6 +116,10 @@ private:
 
 	void HandleUserBufferInput(
 		wxKeyEvent& evt
+	);
+
+	void HandleVerticalScrollbarOnMouseWheelMovement(
+		wxMouseEvent& evt
 	);
 
 	void HandleAnalzyeAndAwakeUserPush(

@@ -6,10 +6,13 @@
 #include <string>
 #include <thread>
 #include "../Window/Window.h"
+#include "../sdl/sdl.h"
 
 class Commands 
 {
 public:
+
+	static void* History(Window*& Obj, Window::CommandArguments);
 
 	static void* Clear(Window*& Obj, Window::CommandArguments);
 
@@ -32,7 +35,7 @@ public:
 			) {
 			Obj->NewLine(); Obj->PushBuffer("`PRINT_MODE: _FILE"); 
 
-			std::filesystem::path BufferFilepath = Buffer.substr(6);
+			std::filesystem::path BufferFilepath = Commands::AddRoute(Buffer.substr(6));
 
 			Obj->PushBuffer(
 				"`PATH: " + BufferFilepath.string()
@@ -62,8 +65,23 @@ public:
 		Obj->PushBuffer(Arguments.List[0]); return 0;
 	}
 
+	static void* HistoryManualSwitch(Window*& Obj, Window::CommandArguments Arguments);
+
+	static void* NetOpenBrowserURL(Window*& Obj, Window::CommandArguments Arguments);
+
+	static void* Help(Window*& Obj, Window::CommandArguments);
+
+	static void* Move(Window*& Obj, Window::CommandArguments);
+
+	static void* Route(Window*& Obj, Window::CommandArguments);
+
+	static void* Ping(Window*& Obj, Window::CommandArguments Arguments);
+
 	Commands(Window*& Window);
 
+	static const std::filesystem::path AddRoute(
+		const std::filesystem::path& Path
+	);
 
 private:
 

@@ -16,20 +16,88 @@ Window::Window(
 	this->Bind(wxEVT_IDLE, &Window::HandleBufferPushIdle, this);
 	this->Bind(wxEVT_CHAR, &Window::HandleUserBufferInput, this);
 	this->Bind(wxEVT_IDLE, &Window::HandleBufferScrollIdle, this);
+	this->Bind(wxEVT_MOUSEWHEEL, &Window::HandleVerticalScrollbarOnMouseWheelMovement, this);
 
 	this->HandleBufferRefresh();
-
+	this->InitializeBuffer();
 
 	this->Show();
 }
 
 //PUBLIC
 
+const std::vector<Window::CommandFunc>& Window::GetTerminalAssignedCommands()
+{
+	return this->TerminalAssignedCommands;
+}
+
+void Window::PushBufferInVector(
+	const std::vector<std::string>& buffer
+) {
+	for (
+		const std::string& bufferFraction : buffer
+		) this->PushBuffer(bufferFraction);
+}
+
+void Window::RunHistory(
+	const int& position
+) {
+
+	if (
+		this->TerminalCommandHistoryBuffer.size() == 0
+		) throw std::exception("Window::RunHistory -> Function terminated. History buffer is empty."); 
+
+	if (
+		this->TerminalCommandHistoryBuffer.size() <= std::abs(position)
+		) {
+		throw std::exception("Window::RunHistory -> Function terminated, position is out of buffer bounds.");
+	}
+
+	if (
+		position < 0
+		) {
+		const std::string& Buffer = this->TerminalCommandHistoryBuffer[this->TerminalCommandHistoryBuffer.size() - std::abs(position) - 1];
+
+		if (
+			Buffer.length() != 0 && std::string(1, Buffer.at(0)) == "!"
+			) throw std::exception("Window::RunHistory -> Function terminated, running this command in loopback may cause memory leaks.");
+
+		this->HandleAnalzyeAndAwakeUserPush(Buffer);
+		return; 
+	}
+
+	const std::string& Buffer = this->TerminalCommandHistoryBuffer[position];
+
+	if (
+		Buffer.length() != 0 && std::string(1, Buffer.at(0)) == "!" 
+		) throw std::exception("Window::RunHistory -> Function terminated, running this command in loopback may cause memory leaks.");
+
+	this->HandleAnalzyeAndAwakeUserPush(Buffer);
+}
+
+std::vector<std::string> Window::GetTerminalCommandHistoryBuffer(
+	const size_t& lenght
+) {
+	std::vector<std::string> ResizedHistoryBuffer; 
+
+	if (
+		this->TerminalCommandHistoryBuffer.size() <= lenght || lenght == -1
+		) return this->TerminalCommandHistoryBuffer;
+
+	for (
+		size_t HistoryIterator = 1; HistoryIterator <= lenght; HistoryIterator++
+		) {
+		ResizedHistoryBuffer.push_back(this->TerminalCommandHistoryBuffer[
+			this->TerminalCommandHistoryBuffer.size() - HistoryIterator
+		]);
+	} return ResizedHistoryBuffer;
+}
+
 void Window::PushCommand(
-	void* (*vFunc)(Window*&, CommandArguments), const std::string& vFuncName
+	void* (*vFunc)(Window*&, CommandArguments), const std::string& vFuncName, const std::vector<std::string> &CommandHelpBuffer
 ) {
 	this->TerminalAssignedCommands.push_back(
-		Window::CommandFunc(vFunc, vFuncName)
+		Window::CommandFunc(vFunc, vFuncName, CommandHelpBuffer)
 	);
 }
 
@@ -172,10 +240,40 @@ bool Window::CanScrollBuffer()
 
 //_HANDLE
 
+void Window::HandleVerticalScrollbarOnMouseWheelMovement(
+	wxMouseEvent& evt
+) {
+	int MouseRotation = evt.GetWheelRotation();
+
+	this->VerticalScrollbar->SetThumbPosition(
+		this->VerticalScrollbar->GetThumbPosition() - MouseRotation
+	);
+
+	this->BufferScrollAmount = this->VerticalScrollbar->GetThumbPosition();
+
+	this->Update(); this->Refresh();
+}
+
+void Window::InitializeBuffer()
+{
+	this->PushBuffer("$ "); this->Refresh(); this->Update();
+}
+
+void Window::UpdateHistoryBuffer(
+	const std::string& Buffer
+) {
+	this->TerminalCommandHistoryBuffer.push_back(
+		Buffer
+	);
+}
+
 void Window::HandleAnalzyeAndAwakeUserPush(
 	std::string Buffer
 ) {
+	this->UpdateHistoryBuffer(Buffer);
+	
 	Window::CommandArguments Arguments = this->GetArgumentsFromString(Buffer);
+
 
 	for (
 		Window::CommandFunc& fStruct : this->TerminalAssignedCommands
@@ -187,9 +285,18 @@ void Window::HandleAnalzyeAndAwakeUserPush(
 		{
 			Window* wptr = this;
 
+			if (
+				Arguments.List.size() != 0 && Arguments.List[0] == "?"
+				) {
+				this->PushBufferInVector(fStruct.AssignedHelp); return;
+			}
+
 			try {
 				void(*FunctionReinterpreted)(Window*&, CommandArguments) = reinterpret_cast<void(*)(Window*&, CommandArguments)>(fStruct.AssignedFunction);
-				FunctionReinterpreted(wptr, Arguments);
+				
+				FunctionReinterpreted(
+					wptr, Arguments
+				);
 			}
 			catch (
 				const std::exception& ex
@@ -311,6 +418,8 @@ void Window::HandleBufferPush()
 	this->MaxBufferScroll();
 }
 
+
+
 void Window::HandleVerticalScrollbar(
 	wxScrollEvent& evt
 ) {
@@ -325,10 +434,11 @@ void Window::HandleVerticalScrollbar(
 
 	bool IsScrollDiffrent = wxCoord(ScrollCalculated) != this->BufferScrollAmount;
 
-	this->BufferScrollAmount = wxCoord(ScrollCalculated);
+	if (
+		!IsScrollDiffrent
+		) return;
 
-	this->Refresh();
-	this->Update();
+	this->BufferScrollAmount = wxCoord(ScrollCalculated); this->Update(); this->Refresh();
 }
 
 //_RENDER
