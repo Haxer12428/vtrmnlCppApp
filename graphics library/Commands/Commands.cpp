@@ -16,7 +16,7 @@ void* Commands::RecursiveFolderFileList(Window*& Obj, Window::CommandArguments A
 		Obj->PushBuffer("static void* Commands::RecursiveFolderFileList -> Function terminated, incorrect amount of arguments; expected: 1"); return 0;
 	}
 
-	std::string List0 = Arguments.List[0];
+	std::string List0 = Commands::AddRoute(Arguments.List[0]).string();
 
 	for (
 		const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(List0)
@@ -66,7 +66,7 @@ void* Commands::Start(Window*& Obj, Window::CommandArguments Arguments)
 		Obj->PushBuffer("static void* Commands::Start -> Function terminated, catched error when trying to assign args[0][int]."); return 0;
 	}
 
-	std::filesystem::path FilePath = Arguments.List[1];
+	std::filesystem::path FilePath = Commands::AddRoute(Arguments.List[1]);
 
 	Obj->PushBuffer("Application will be run after delay is over...");
 	std::this_thread::sleep_for(std::chrono::seconds(DelaySeconds));
@@ -148,11 +148,16 @@ void* Commands::Move(Window*& Obj, Window::CommandArguments Arguments)
 		) throw std::exception("Commands::Move -> Function terminated, incorrect amount of arguments; Expected 2[from: std::filesystem::path, to: std::filesystem::path].");
 
 	if (
-		!std::filesystem::is_regular_file(Arguments.List[0])
+		!std::filesystem::is_regular_file(Commands::AddRoute(Arguments.List[0]))
 		) throw std::exception("Commands::Move -> Function terminated, FROM_FILE doesn't exist.");
 
-	std::filesystem::copy_file(Arguments.List[0], Arguments.List[1]);
-	std::filesystem::remove(Arguments.List[0]);
+	std::filesystem::copy_file(
+		Commands::AddRoute(Arguments.List[0]), Commands::AddRoute(Arguments.List[1])
+	);
+
+	std::filesystem::remove(
+		Commands::AddRoute(Arguments.List[0])
+	);
 }
 
 void* Commands::NetOpenBrowserURL(Window*& Obj, Window::CommandArguments Arguments)
