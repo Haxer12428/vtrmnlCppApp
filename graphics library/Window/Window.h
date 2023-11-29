@@ -73,7 +73,7 @@ private:
 
 	wxScrollBar* VerticalScrollbar;
 
-	wxCoord BufferScrollAmount = 0;
+	float BufferScrollAmount = 0;
 	wxCoord BufferLineHeight = 0;
 
 	std::string UserInputBuffer = "";

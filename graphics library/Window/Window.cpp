@@ -250,8 +250,6 @@ void Window::HandleVerticalScrollbarOnMouseWheelMovement(
 	);
 
 	this->BufferScrollAmount = this->VerticalScrollbar->GetThumbPosition();
-
-	this->Update(); this->Refresh();
 }
 
 void Window::InitializeBuffer()
@@ -403,10 +401,18 @@ void Window::HandleBufferRefresh() {
 				)
 			{
 				if (
-					BufferPushCount == 0
-					) continue;
+					BufferPushCount != 0
+					) {
+					this->Refresh(); this->Update(); BufferPushCount = 0; this->HandleBufferPush();
+				}
 
-				this->Refresh(); this->Update(); BufferPushCount = 0; this->HandleBufferPush();
+				if (
+					this->BufferScrollOnLastUpdate != this->BufferScrollAmount
+					) {
+					std::this_thread::sleep_for(std::chrono::milliseconds(1));
+					this->Refresh(); this->Update(); this->BufferScrollOnLastUpdate = this->BufferScrollAmount;
+				}
+			
 			}
 		});
 	Refresh.detach();
@@ -417,7 +423,6 @@ void Window::HandleBufferPush()
 	
 	this->MaxBufferScroll();
 }
-
 
 
 void Window::HandleVerticalScrollbar(
@@ -438,7 +443,7 @@ void Window::HandleVerticalScrollbar(
 		!IsScrollDiffrent
 		) return;
 
-	this->BufferScrollAmount = wxCoord(ScrollCalculated); this->Update(); this->Refresh();
+	this->BufferScrollAmount = wxCoord(ScrollCalculated);// this->Update(); this->Refresh();
 }
 
 //_RENDER
