@@ -219,7 +219,7 @@ Commands::Commands(Window*& obj) : WindowObject(obj)
 {
 	//obj->PushCommand(Commands::Ping, "Ping", std::vector<std::string>());
 
-	obj->PushCommand(Commands::Route, "Route", std::vector<std::string>{"Route", "  *Command used to help with file paths", "  *Can be used with arguments: [print: none | set: std::filesystem::path]"});
+	obj->PushCommand(Commands::Route, "Route", std::vector<std::string>{"`Route", "  *Command used to help with file paths", "  *Can be used with arguments: [print: none | set: std::filesystem::path]"});
 
 	obj->PushCommand(Commands::Move, "Move", std::vector<std::string>{"`Move", "  *Command used to move files.", "  *Must be used with arguments: [from: std::filesystem::path, to: std::filesystem::path]"});
 
