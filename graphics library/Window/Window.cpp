@@ -17,6 +17,7 @@ Window::Window(
 	this->Bind(wxEVT_CHAR, &Window::HandleUserBufferInput, this);
 	this->Bind(wxEVT_IDLE, &Window::HandleBufferScrollIdle, this);
 	this->Bind(wxEVT_MOUSEWHEEL, &Window::HandleVerticalScrollbarOnMouseWheelMovement, this);
+	this->Bind(wxEVT_CHAR, &Window::HandleHistoryMovementWithKeyboardArrows, this);
 
 	this->HandleBufferRefresh();
 	this->InitializeBuffer();
@@ -240,6 +241,46 @@ bool Window::CanScrollBuffer()
 
 //_HANDLE
 
+void Window::HandleHistoryMovementWithKeyboardArrows(
+	wxKeyEvent& evt
+) {
+	int Keycode = evt.GetKeyCode();
+	int HistoryDif = 0;
+
+	if (
+		Keycode == WXK_UP
+		) HistoryDif = -1; 
+
+	if (
+		Keycode == WXK_DOWN
+		) HistoryDif = 1; 
+
+	if (
+		HistoryDif == 0
+		) {
+		evt.Skip(); return;
+	}
+
+	int HistoryMovementSum = this->HistoryKeyboardMovement + HistoryDif; 
+
+	if (
+		HistoryMovementSum < 0
+		) return; 
+
+	if (
+		this->TerminalCommandHistoryBuffer.size() <= HistoryMovementSum
+		) return; 
+	this->HistoryKeyboardMovement = HistoryMovementSum;
+
+	this->UserInputBuffer = this->TerminalCommandHistoryBuffer[this->HistoryKeyboardMovement];
+
+	this->TerminalBuffer[
+		this->TerminalBuffer.size() - 1
+	] = "$ " + this->UserInputBuffer;
+ 
+	this->Update(); this->Refresh();
+}
+
 void Window::HandleVerticalScrollbarOnMouseWheelMovement(
 	wxMouseEvent& evt
 ) {
@@ -262,7 +303,7 @@ void Window::UpdateHistoryBuffer(
 ) {
 	this->TerminalCommandHistoryBuffer.push_back(
 		Buffer
-	);
+	); this->HistoryKeyboardMovement = this->TerminalCommandHistoryBuffer.size();
 }
 
 void Window::HandleAnalzyeAndAwakeUserPush(
@@ -366,7 +407,7 @@ void Window::HandleUserBufferInput(
 
 	this->ChangeUserInput(
 		KeycodeChar
-	);
+	); evt.Skip();
 }
 
 void Window::HandleBufferPushIdle(

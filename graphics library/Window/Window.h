@@ -81,6 +81,8 @@ private:
 	long BufferPushCount = 0;
 	float BufferScrollOnLastUpdate = 0; 
 
+	int HistoryKeyboardMovement = 0; 
+
 	//Render
 
 	void RenderText(
@@ -115,6 +117,10 @@ private:
 	);
 
 	void HandleUserBufferInput(
+		wxKeyEvent& evt
+	);
+
+	void HandleHistoryMovementWithKeyboardArrows(
 		wxKeyEvent& evt
 	);
 

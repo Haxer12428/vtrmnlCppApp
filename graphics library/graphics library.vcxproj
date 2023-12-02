@@ -144,6 +144,7 @@
     <ClCompile Include="gl.cpp" />
     <ClCompile Include="sdl\sdl.cpp" />
     <ClCompile Include="Window\LoadConfig.cpp" />
+    <ClCompile Include="Window\TerminalAssignedCommands.cpp" />
     <ClCompile Include="Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>

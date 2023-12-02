@@ -79,6 +79,8 @@ public:
 
 	static void* fCopy(Window*& Obj, Window::CommandArguments Arguments);
 
+	static void* List(Window*& Obj, Window::CommandArguments Arguments);
+
 	Commands(Window*& Window);
 
 	static const std::filesystem::path AddRoute(

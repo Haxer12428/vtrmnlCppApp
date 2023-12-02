@@ -221,7 +221,7 @@ void* Commands::fCopy(Window*& Obj, Window::CommandArguments Arguments)
 
 	if (
 		!std::filesystem::is_regular_file(_FROM)
-		) throw std::exception("static void* Commands::fCopy -> Function terminated");
+		) throw std::exception("static void* Commands::fCopy -> Function terminated, _FROM file ain't a existing.");
 
 	bool Response = std::filesystem::copy_file(_FROM, _TO);
 
@@ -230,6 +230,26 @@ void* Commands::fCopy(Window*& Obj, Window::CommandArguments Arguments)
 		) throw std::exception("static void* Commands::fCopy -> Function terminated, unknown error occured");
 
 	return 0; 
+}
+
+void* Commands::List(Window*& Obj, Window::CommandArguments Arguments)
+{
+	std::filesystem::path _FROM = Commands::AddRoute(Arguments.List[0]);
+
+	if (
+		!std::filesystem::is_directory(_FROM)
+		) throw std::exception("static void* Commands::List -> Function termianted, directory is invaild");
+	Obj->NewLine();
+
+	for (
+		const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(_FROM)
+		) {
+		Obj->PushBuffer(
+			"`" + entry.path().string()
+		);
+	} Obj->NewLine();
+
+	return 0;
 }
 
 
