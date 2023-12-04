@@ -142,6 +142,12 @@
     <ClCompile Include="Commands\Commands.cpp" />
     <ClCompile Include="Config\Config.cpp" />
     <ClCompile Include="gl.cpp" />
+    <ClCompile Include="Monitor\Buffer.cpp" />
+    <ClCompile Include="Monitor\Configuration.cpp" />
+    <ClCompile Include="Monitor\Graph.cpp" />
+    <ClCompile Include="Monitor\Render.cpp" />
+    <ClCompile Include="sdl\CPU.cpp" />
+    <ClCompile Include="sdl\Memory.cpp" />
     <ClCompile Include="sdl\sdl.cpp" />
     <ClCompile Include="Window\LoadConfig.cpp" />
     <ClCompile Include="Window\TerminalAssignedCommands.cpp" />
@@ -150,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="Commands\Commands.h" />
     <ClInclude Include="Config\Config.h" />
+    <ClInclude Include="Monitor\Graph.h" />
     <ClInclude Include="sdl\sdl.h" />
     <ClInclude Include="Window\Window.h" />
   </ItemGroup>

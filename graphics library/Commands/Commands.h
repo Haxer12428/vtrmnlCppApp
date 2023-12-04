@@ -7,6 +7,7 @@
 #include <thread>
 #include "../Window/Window.h"
 #include "../sdl/sdl.h"
+#include "../Monitor/Graph.h"
 
 class Commands 
 {
@@ -80,6 +81,21 @@ public:
 	static void* fCopy(Window*& Obj, Window::CommandArguments Arguments);
 
 	static void* List(Window*& Obj, Window::CommandArguments Arguments);
+
+	static void* MemoryTotal(Window*& Obj, Window::CommandArguments Arguments);
+
+	static void* MemoryMonitorUsage(Window*& Obj, Window::CommandArguments Arguments);
+
+	static void* CPUMonitorUsage(
+		Window*& Obj, Window::CommandArguments Arguments
+	);
+	static void* MemoryMonitorUsageSelf(
+		Window*& Obj, Window::CommandArguments Arguments
+	);
+
+	static void* CPUMonitorFrequency(
+		Window*& Obj, Window::CommandArguments Arguments
+	);
 
 	Commands(Window*& Window);
 

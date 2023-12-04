@@ -27,11 +27,6 @@ Window::Window(
 
 //PUBLIC
 
-const std::vector<Window::CommandFunc>& Window::GetTerminalAssignedCommands()
-{
-	return this->TerminalAssignedCommands;
-}
-
 void Window::PushBufferInVector(
 	const std::vector<std::string>& buffer
 ) {
@@ -522,9 +517,24 @@ void Window::RenderText(
 	wxCoord HeightDif = 3; wxCoord TextHeight = Paint.GetTextExtent("TextLine").y;
 	
 	this->BufferLineHeight = (TextHeight + HeightDif);
+	size_t TerminalBufferSize = this->TerminalBuffer.size();
+
+	int iStart; int iFinish;
+
+	wxCoord TextDifSum = (HeightDif + TextHeight);
+
+	if (
+		BufferScrollAmount == 0
+		) {
+		iStart = 0; iFinish = TerminalBufferSize;
+	}
+	else {
+		iStart = this->BufferScrollAmount / TextDifSum;
+		iFinish = std::min(int(TerminalBufferSize), (iStart + ((this->GetClientSize().y + TextDifSum*2) / TextDifSum)));
+	}
 
 	for (
-		int iBuffer = 0; iBuffer < this->TerminalBuffer.size(); iBuffer++
+		int iBuffer = iStart; iBuffer < iFinish; iBuffer++
 		)
 	{
 		std::string Buffer = this->TerminalBuffer[

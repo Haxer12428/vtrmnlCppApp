@@ -252,9 +252,82 @@ void* Commands::List(Window*& Obj, Window::CommandArguments Arguments)
 	return 0;
 }
 
+void* Commands::MemoryTotal(
+	Window*& Obj, Window::CommandArguments Arguments
+) {
+	Obj->PushBuffer(std::to_string(Sdl::Memory().GetTotalMemory(Sdl::Memory::MB)) + " MB");
+}
+
+int MonitorStatusFunction()
+{
+	return static_cast<int>(Sdl::Memory().GetMemoryUsage(Sdl::Memory::KB));
+}
+
+void* Commands::MemoryMonitorUsage(
+	Window*& Obj, Window::CommandArguments Arguments
+) {
+	Graph* Monitor = new Graph("Memory Usage Monitor", static_cast<int>(Sdl::Memory().GetTotalMemory(Sdl::Memory::KB)));
+	Monitor->AssignStatusFunction(MonitorStatusFunction);
+
+	return 0; 
+}
+
+int CPUMonitorStatusFunction()
+{
+	return static_cast<int>(Sdl::CPU().GetUsage());
+}
+
+void* Commands::CPUMonitorUsage(
+	Window*& Obj, Window::CommandArguments Arguments
+) {
+	Graph* Monitor = new Graph("CPU Usage Monitor", 100);
+	Monitor->AssignStatusFunction(CPUMonitorStatusFunction);
+
+	return 0;
+}
+
+int MemoryMonitorSelfLoadFunction()
+{
+	return static_cast<int>(Sdl::Memory().GetMemoryUsageForCurrentProcess(Sdl::Memory::KB));
+}
+
+void* Commands::MemoryMonitorUsageSelf(
+	Window*& Obj, Window::CommandArguments Arguments
+) {
+	Graph* Monitor = new Graph("Memory Self Usage Monitor", -1);
+	Monitor->AssignStatusFunction(MemoryMonitorSelfLoadFunction);
+
+	return 0;
+}
+
+int CPUMonitorFreqStatusFunction()
+{
+	return static_cast<int>(Sdl::CPU().GetFrequency());
+}
+
+void* Commands::CPUMonitorFrequency(
+	Window*& Obj, Window::CommandArguments Arguments
+) {
+	Graph* Monitor = new Graph("CPU Frequency Monitor", -1);
+	Monitor->AssignStatusFunction(CPUMonitorFreqStatusFunction);
+
+	return 0;
+}
+
 
 Commands::Commands(Window*& obj) : WindowObject(obj)
 {
+
+	obj->PushCommand(Commands::MemoryMonitorUsage, "Memory.Monitor->Usage", std::vector<std::string>{"`Memory.Monitor->Usage", "  *Function used to monitor MEMORY usage by the system."});
+
+	obj->PushCommand(Commands::MemoryMonitorUsageSelf, "Memory.Monitor->Usage.Self", std::vector<std::string>{"`Memory.Monitor->Usage.Self", "  *Function used to monitor memory use of the program."});
+
+	obj->PushCommand(Commands::CPUMonitorFrequency, "CPU.Monitor->Frequency", std::vector<std::string>{"`CPU.Monitor->Frequency", "  *Function used to monitor CPU frequency."});
+
+	obj->PushCommand(Commands::CPUMonitorUsage, "CPU.Monitor->Usage", std::vector<std::string>{"`CPU.Monitor->Usage", "  *Function used to monitor CPU usage by the system."});
+
+	obj->PushCommand(Commands::MemoryTotal, "Memory.Total", std::vector<std::string>{"`Memory.Total", "  *Function used to display total memory size in MB format."});
+
 	obj->PushCommand(Commands::fCopy, "fCopy", std::vector<std::string>{"`fCopy", "  *Command used to copy file", "  *Must be used with arguments: [from: std::filesystem::path, to: std::filesystem::path]"});
 
 	obj->PushCommand(Commands::Route, "Route", std::vector<std::string>{"`Route", "  *Command used to help with file paths", "  *Can be used with arguments: [print: none | set: std::filesystem::path]"});

@@ -1,6 +1,7 @@
 #include "Window/Window.h"
 #include "Config/Config.h"
 #include "Commands/Commands.h"
+#include <windows.h>
 
 class App : public wxApp {
 public:
