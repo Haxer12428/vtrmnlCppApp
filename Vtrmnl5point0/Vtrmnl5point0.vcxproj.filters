@@ -123,6 +123,9 @@
     <ClCompile Include="Application\Application\CMD\_DRAW\VERTICAL_SLIDER\DrawVerticalSlider.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Application\Application\CMD\_COMMAND\COMMAND_REFRESH.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">

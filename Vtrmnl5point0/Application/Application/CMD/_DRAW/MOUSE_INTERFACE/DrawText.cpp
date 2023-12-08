@@ -1,7 +1,7 @@
 #include "../../Cmd.h"
 
 const std::vector<std::string> Cmd::MOUSE_INTERFACE_DRAW_GET_TEXT_VECTOR() {
-	return { "Settings ", " Memory Usage ", " Help " };
+	return { "(~) ", " Settings ", " Memory Usage ", " Help "};
 }
 
 const void Cmd::MOUSE_INTERFACE_DRAW_UPDATE_TEXT_SIZES(

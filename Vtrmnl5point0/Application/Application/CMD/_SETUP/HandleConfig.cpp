@@ -3,10 +3,6 @@
 const void Cmd::SETUP_CONFIG_HANDLE(
 	const std::filesystem::path& _AT 
 ) {
-	this->Config = new Engine::Config(
-		_AT.string() + "\\config.cfg"
-	);
-
 	std::vector<int> BACKGROUND_STYLE_COLOR = Engine::Vector::TransformStringToInt(Engine::String::GetVector(this->Config->Desire("$BACKGROUND_STYLE_COLOR", "35,39,41")));
 
 	std::vector<int> DEFAULT_SIZE = Engine::Vector::TransformStringToInt(Engine::String::GetVector(this->Config->Desire("$DEFAULT_SIZE", "1000,750")));

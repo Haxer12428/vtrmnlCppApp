@@ -237,4 +237,8 @@ private:
 	void* COMMAND_SETTINGS(
 		const std::vector<std::string>&
 	); 
+
+	void* COMMAND_REFRESH(
+		const std::vector<std::string>&
+	); 
 };
