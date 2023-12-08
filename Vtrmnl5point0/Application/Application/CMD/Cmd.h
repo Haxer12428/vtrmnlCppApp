@@ -104,6 +104,15 @@ private:
 		const int& TEXT_R, const int& TEXT_G, const int& TEXT_B, const int& BACKGROUND_R, const int& BACKGROUND_G, const int& BACKGROUND_B
 	);
 
+	// [ _VERTICAL_SLIDER ] 
+	const void SETUP_VERTICAL_SLIDER_RESERVED_SPACE(
+		const int& SIZE
+	); 
+
+	const void SETUP_VERTICAL_SLIDER_COLORS(
+		const int& MAIN_R, const int& MAIN_G, const int& MAIN_B, const int& BACKGROUND_R, const int& BACKGROUND_G, const int& BACKGROUND_B
+	);
+
 	// 
 	// [ DRAW ] 
 	// 
@@ -161,6 +170,12 @@ private:
 	// 
 	// [ VARIABLES ] 
 	// 
+
+	// [ _VERTICAL_SLIDER ] 
+	int VERTICAL_SLIDER_RESERVED_SPACE; 
+	
+	wxColor VERTICAL_SLIDER_COLOR_BACKGROUND; 
+	wxColor VERTICAL_SLIDER_COLOR_MAIN; 
 	
 	// [ _MOUSE_INTERFACE ]
 

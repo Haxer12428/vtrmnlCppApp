@@ -158,6 +158,7 @@
     <ClCompile Include="Application\Application\CMD\_SETUP\HandleSETUPCommands.cpp" />
     <ClCompile Include="Application\Application\CMD\_SETUP\HandleConfig.cpp" />
     <ClCompile Include="Application\Application\CMD\_SETUP\HandleMOUSE_INTERFACE.cpp" />
+    <ClCompile Include="Application\Application\CMD\_SETUP\HandleSetupVERTICAL_SLIDER.cpp" />
     <ClCompile Include="Application\Application\CMD\_SETUP\HandleSize.cpp" />
     <ClCompile Include="Application\Application\CMD\_SETUP\HandleStyle.cpp" />
     <ClCompile Include="Application\Application\CMD\_SETUP\HandleVariables.cpp" />

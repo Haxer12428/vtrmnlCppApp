@@ -18,7 +18,7 @@ class Application : public wxApp {
 public:
 
 	bool OnInit() {
-		Engine::Config* Cfg = new Engine::Config("C:/Vtrmnl/5/config.txt");
+		//Engine::Config* Cfg = new Engine::Config("C:/Vtrmnl/5/config.txt");
 		//wxLogMessage(Cfg->Desire("$Font", "Hack").c_str());
 		//wxLogMessage(std::to_string(Engine::String::Find("asTHIS nigger", "THIS")).c_str());
 

@@ -1,0 +1,14 @@
+#include "../Cmd.h"
+
+const void Cmd::SETUP_VERTICAL_SLIDER_COLORS(
+	const int& MAIN_R, const int& MAIN_G, const int& MAIN_B, const int& BACKGROUND_R, const int& BACKGROUND_G, const int& BACKGROUND_B
+) {
+	this->VERTICAL_SLIDER_COLOR_BACKGROUND = wxColor(BACKGROUND_R, BACKGROUND_G, BACKGROUND_B);
+	this->VERTICAL_SLIDER_COLOR_MAIN = wxColor(MAIN_R, MAIN_G, MAIN_B);
+}
+
+const void Cmd::SETUP_VERTICAL_SLIDER_RESERVED_SPACE(
+	const int& RESERVED
+) {
+	this->VERTICAL_SLIDER_RESERVED_SPACE = RESERVED;
+}

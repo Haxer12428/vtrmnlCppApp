@@ -3,7 +3,7 @@
 Engine::Config::Config(
 	const std::filesystem::path& _PATH
 ) : _PATH(_PATH) {
-	this->HandleFile();
+	
 }
 
 void Engine::Config::HandleFile() {
@@ -31,7 +31,10 @@ const std::string Engine::Config::Desire(
 
 	if (
 		!_FILE.is_open()
-		) return "NULL";
+		) {
+		this->HandleFile();
+		return "NULL";
+	}
 
 	while (
 		std::getline(_FILE, _BUF)
@@ -95,5 +98,5 @@ const std::string Engine::Config::Desire(
 
 	_FILE.close();
 
-	return "NULL";
+	return _DEFAULTvalue;
 }
