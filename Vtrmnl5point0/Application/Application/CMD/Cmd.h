@@ -117,6 +117,22 @@ private:
 	// [ DRAW ] 
 	// 
 
+	// [ _VERTICAL_SLIDER ] 
+	void VERTICAL_SLIDER_DRAW(
+		wxPaintEvent& evt
+	); 
+
+	const void VERTICAL_SLIDER_DRAW_BACKGROUND(
+		wxPaintDC* dc
+	); 
+
+	const void VERTICAL_SLIDER_DRAW_MAIN(
+		wxPaintDC* dc
+	); 
+
+	const wxPoint VERTICAL_SLIDER_DRAW_GET_BACKGROUND_POSITION(); 
+	const wxSize VERTICAL_SLIDER_DRAW_GET_BACKGROUND_SIZE();
+
 	// [ _MOUSE_INTERFACE ]
 	const std::vector<std::string> MOUSE_INTERFACE_DRAW_GET_TEXT_VECTOR(); 
 

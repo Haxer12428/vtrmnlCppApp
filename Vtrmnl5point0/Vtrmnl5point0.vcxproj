@@ -147,6 +147,9 @@
     <ClCompile Include="Application\Application\CMD\Cmd.cpp" />
     <ClCompile Include="Application\Application\CMD\_COMMAND\COMMAND_MEMORY_USAGE.cpp" />
     <ClCompile Include="Application\Application\CMD\_COMMAND\COMMAND_SETTINGS.cpp" />
+    <ClCompile Include="Application\Application\CMD\_DRAW\VERTICAL_SLIDER\DrawVerticalSlider.cpp" />
+    <ClCompile Include="Application\Application\CMD\_DRAW\VERTICAL_SLIDER\DrawVerticalSliderBackground.cpp" />
+    <ClCompile Include="Application\Application\CMD\_DRAW\VERTICAL_SLIDER\DrawVerticalSliderMain.cpp" />
     <ClCompile Include="Application\Application\CMD\_HANDLE\COMMANDS\HandleCommands.cpp" />
     <ClCompile Include="Application\Application\CMD\_PUBLIC\HandlePUBLICCommands.cpp" />
     <ClCompile Include="Application\Application\CMD\_DRAW\MOUSE_INTERFACE\DrawBackground.cpp" />

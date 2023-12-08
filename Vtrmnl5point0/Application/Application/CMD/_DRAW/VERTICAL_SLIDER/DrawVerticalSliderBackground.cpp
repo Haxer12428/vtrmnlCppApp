@@ -1,0 +1,24 @@
+#include "../../Cmd.h"
+
+const wxPoint Cmd::VERTICAL_SLIDER_DRAW_GET_BACKGROUND_POSITION() {
+	return wxPoint(
+		this->GetClientSize().x - this->VERTICAL_SLIDER_RESERVED_SPACE, this->MOUSE_INTERFACE_RESERVED_SPACE
+	);
+}
+
+const wxSize Cmd::VERTICAL_SLIDER_DRAW_GET_BACKGROUND_SIZE() {
+	return wxSize(
+		this->VERTICAL_SLIDER_RESERVED_SPACE, this->GetClientSize().y - this->MOUSE_INTERFACE_RESERVED_SPACE
+	);
+}
+
+const void Cmd::VERTICAL_SLIDER_DRAW_BACKGROUND(
+	wxPaintDC* dc
+) {
+	dc->SetBrush(this->VERTICAL_SLIDER_COLOR_BACKGROUND);
+	dc->SetPen(this->VERTICAL_SLIDER_COLOR_BACKGROUND);
+
+	dc->DrawRectangle(
+		this->VERTICAL_SLIDER_DRAW_GET_BACKGROUND_POSITION(), this->VERTICAL_SLIDER_DRAW_GET_BACKGROUND_SIZE()
+	);
+}
