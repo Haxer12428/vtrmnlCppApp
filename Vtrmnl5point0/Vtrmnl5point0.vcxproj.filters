@@ -126,6 +126,15 @@
     <ClCompile Include="Application\Application\CMD\_COMMAND\COMMAND_REFRESH.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Application\Application\CMD\_HANDLE\VERTICAL_SLIDER\HandleVerticalSlider.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Application\CMD\_HANDLE\HandleResize.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Application\CMD\_HANDLE\HandleUpdate.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">

@@ -140,6 +140,9 @@ private:
 	const wxPoint VERTICAL_SLIDER_DRAW_GET_MAIN_POSITION();
 	const wxSize VERTICAL_SLIDER_DRAW_GET_MAIN_SIZE();
 
+	const wxPoint VERTICAL_SLIDER_DRAW_GET_MAIN_STARTING_POSITION(); 
+	const wxPoint VERTICAL_SLIDER_DRAW_GET_MAIN_FINAL_POSITION();
+
 	// [ _MOUSE_INTERFACE ]
 	const std::vector<std::string> MOUSE_INTERFACE_DRAW_GET_TEXT_VECTOR(); 
 
@@ -175,6 +178,11 @@ private:
 	// 
 	// [ HANDLE ]  
 	//
+	const void HANDLE_UPDATE(); 
+
+	void HANDLE_RESIZE(
+		wxSizeEvent& evt 
+	); 
 
 	// [ _MOUSE_INTERFACE ] 
 	void MOUSE_INTERFACE_HANDLE_MOUSE_INTERACTION_OPEN(
@@ -186,9 +194,27 @@ private:
 		wxMouseEvent& evt
 	);
 
+	// [ _VERTICAL_SLIDER ] 
+	void VERTICAL_SLIDER_HANDLE_MOUSE_INTERACTION(
+		wxMouseEvent& evt
+	); 
+
+	void VERTICAL_SLIDER_HANLE_MOUSE_INTERACTION_START(
+		wxMouseEvent& evt 
+	); 
+
+	const void VERTICAL_SLIDER_HANDLE_SET_SCROLL(
+		const int& SCROL
+	);
+
+	const int VERTICAL_SLIDER_HANDLE_GET_MAX_SCROLL();
+
+	// [ _COMMANDS ] 
+
 	const void COMMANDS_HANDLE_FIND_AND_CALL(
 		const std::string& NAME, const std::vector<std::string>& ARGUMENTS
 	); 
+
 
 	// 
 	// [ VARIABLES ] 
@@ -205,6 +231,9 @@ private:
 	int VERTICAL_SLIDER_MAIN_DIFFERENCE_FROM_BACKGROUND_X; 
 	int VERTICAL_SLIDER_MAIN_DIFFERENCE_FROM_BACKGROUND_Y;
 	
+	int VERTICAL_SLIDER_MAIN_DIFFERENCE_FROM_MOUSE_Y;
+	bool VERTICAL_SLIDER_MAIN_INTERACTING = false; 
+
 	// [ _MOUSE_INTERFACE ]
 
 	// _DRAW
@@ -236,6 +265,8 @@ private:
 
 	std::filesystem::path& _AT; 
 	Engine::Config* Config;
+
+	bool FORCE_UPDATE = false; 
 
 	// 
 	// [ _COMMAND's ]

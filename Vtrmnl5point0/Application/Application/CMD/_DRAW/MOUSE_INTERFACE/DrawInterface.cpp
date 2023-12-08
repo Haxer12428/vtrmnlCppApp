@@ -14,5 +14,6 @@ void Cmd::MOUSE_INTERFACE_DRAW(
 	this->MOUSE_INTERFACE_DRAW_BACKGROUND(dc);
 	this->MOUSE_INTERFACE_DRAW_TEXT(dc);
 
+	delete dc;
 	evt.Skip();
 }
