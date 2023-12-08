@@ -5,4 +5,6 @@ void* Cmd::COMMAND_SETTINGS(
 ) {
 	wxString command = "notepad \"" + this->Config->GetPath().string() + "\"";
 	wxExecute(command, wxEXEC_ASYNC);
+
+	return 0;
 }

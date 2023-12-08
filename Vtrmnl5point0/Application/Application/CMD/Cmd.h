@@ -34,7 +34,7 @@ public:
 				(HANDLER->*FUNC)(ARGUMENTS);
 			}
 			catch (
-				const Engine::Debug::Object& Exception
+				const Engine::Debug::Object& /*Exception*/
 				) {
 				return false; 
 			}
@@ -113,6 +113,10 @@ private:
 		const int& MAIN_R, const int& MAIN_G, const int& MAIN_B, const int& BACKGROUND_R, const int& BACKGROUND_G, const int& BACKGROUND_B
 	);
 
+	const void SETUP_VERTICAL_SLIDER_DIFFERENCES(
+		const int& X, const int& Y
+	);
+
 	// 
 	// [ DRAW ] 
 	// 
@@ -132,6 +136,9 @@ private:
 
 	const wxPoint VERTICAL_SLIDER_DRAW_GET_BACKGROUND_POSITION(); 
 	const wxSize VERTICAL_SLIDER_DRAW_GET_BACKGROUND_SIZE();
+
+	const wxPoint VERTICAL_SLIDER_DRAW_GET_MAIN_POSITION();
+	const wxSize VERTICAL_SLIDER_DRAW_GET_MAIN_SIZE();
 
 	// [ _MOUSE_INTERFACE ]
 	const std::vector<std::string> MOUSE_INTERFACE_DRAW_GET_TEXT_VECTOR(); 
@@ -192,6 +199,11 @@ private:
 	
 	wxColor VERTICAL_SLIDER_COLOR_BACKGROUND; 
 	wxColor VERTICAL_SLIDER_COLOR_MAIN; 
+
+	int VERTICAL_SLIDER_SCROLL = 0; 
+
+	int VERTICAL_SLIDER_MAIN_DIFFERENCE_FROM_BACKGROUND_X; 
+	int VERTICAL_SLIDER_MAIN_DIFFERENCE_FROM_BACKGROUND_Y;
 	
 	// [ _MOUSE_INTERFACE ]
 

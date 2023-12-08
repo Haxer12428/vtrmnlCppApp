@@ -10,4 +10,10 @@ Cmd::Cmd(
 	this->SETUP_COMMANDS();
 
 	this->Show(true);
+	
+	std::thread T([&] {
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		this->Refresh(); this->Update();
+		});
+	T.detach();
 }

@@ -30,7 +30,7 @@ public:
 			);
 		}
 		catch (
-			const std::exception& ex
+			const std::exception& /*ex*/
 			) {
 			wxLogMessage("Critical _SETUP error occured, please restart application. \n(?) This might be caused by application overriding corrupted config.cfg");
 		}

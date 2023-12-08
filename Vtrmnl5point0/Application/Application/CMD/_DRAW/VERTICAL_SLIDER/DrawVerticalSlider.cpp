@@ -5,6 +5,7 @@ void Cmd::VERTICAL_SLIDER_DRAW(
 ) { 
 	wxPaintDC* dc = new wxPaintDC(this);
 	this->VERTICAL_SLIDER_DRAW_BACKGROUND(dc);
+	this->VERTICAL_SLIDER_DRAW_MAIN(dc);
 
 	evt.Skip();
 }
