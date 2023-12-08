@@ -65,7 +65,19 @@ void Cmd::VERTICAL_SLIDER_HANDLE_MOUSE_INTERACTION(
 		evt.Skip(); return; 
 	}
 
-
+	
 	this->VERTICAL_SLIDER_HANDLE_SET_SCROLL(VERTICAL_SLIDER_SCROLL_CALCULATED); 
 	this->FORCE_UPDATE = true;
+}
+
+void Cmd::VERTICAL_SLIDER_HANDLE_MOUSEWHEEL_INTERACTION(
+	wxMouseEvent& evt
+) {
+	int ROTATION = evt.GetWheelRotation() / evt.GetWheelDelta(); 
+
+	this->VERTICAL_SLIDER_HANDLE_SET_SCROLL(
+		this->VERTICAL_SLIDER_SCROLL - ROTATION*50
+	);
+	
+	this->FORCE_UPDATE = true; evt.Skip();
 }

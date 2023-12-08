@@ -203,6 +203,10 @@ private:
 		wxMouseEvent& evt 
 	); 
 
+	void VERTICAL_SLIDER_HANDLE_MOUSEWHEEL_INTERACTION(
+		wxMouseEvent& evt
+	); 
+
 	const void VERTICAL_SLIDER_HANDLE_SET_SCROLL(
 		const int& SCROL
 	);
