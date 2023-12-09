@@ -135,6 +135,18 @@
     <ClCompile Include="Application\Application\CMD\_HANDLE\HandleUpdate.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Application\Application\CMD\_SETUP\HandleSetupCommandLine.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Application\CMD\_HANDLE\COMMAND_LINE\HandleCommandLine.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Application\CMD\_DRAW\COMMAND_LINE\DrawCommandLine.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Application\CMD\_DRAW\COMMAND_LINE\DrawCommandLineBuffer.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h">

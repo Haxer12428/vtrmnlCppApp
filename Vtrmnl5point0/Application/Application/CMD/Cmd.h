@@ -1,5 +1,6 @@
 #pragma once
 #include <wx/wx.h>
+#include <wx/dcbuffer.h>
 #include <filesystem>
 #include "../../../Engine/Engine.h"
 #include "../../Render/Render.h"
@@ -14,6 +15,11 @@ public:
 	// 
 	// [ STRUCTS ] 
 	// 
+
+	enum COMMAND_LINE_MODE
+	{
+		READ_AND_WRITE = 0
+	};
 
 	const std::vector<std::string> ARGUMENT_EMPTY;
 
@@ -56,10 +62,31 @@ public:
 		Cmd::COMMAND_STRUCT COMMAND
 	);
 
+	const void COMMAND_LINE_HANDLE_PUSH_BUFFER_LINE(
+		const std::string& BUFFER
+	);
+
 private:
 	//
 	// [ SETUP ] 
 	//
+	
+	// [ _COMMAND_LINE ] 
+	const void SETUP_COMMAND_LINE_FONT(
+		const std::string& FACENAME, const int& SIZE
+	);
+
+	const void SETUP_COMMAND_LINE_DEFAULT_COLOR(
+		const int& R, const int& G, const int& B
+	);
+
+	const void SETUP_COMMAND_LINE_DIFFERENCE_BETWEEN_EDGES(
+		const int& LENGHT, const int& HEIGHT
+	);
+
+	const void SETUP_COMMAND_LINE_DIFFERENCE_BETWEEN_LINES(
+		const int& DIF
+	);
 
 	// [ _COMMAND ] 
 	void SETUP_COMMANDS(); 
@@ -121,6 +148,30 @@ private:
 	// [ DRAW ] 
 	// 
 
+	// [ _COMMAND_LINE ] 
+	void COMMAND_LINE_DRAW(
+		wxPaintEvent& evt
+	); 
+
+	const int COMMAND_LINE_DRAW_GET_MAXIMAL_SCROLL();
+
+	const int COMMAND_LINE_DRAW_GET_SCROLL(
+		const float &PROCENTAGE
+	);
+
+	const void COMMAND_LINE_DRAW_BUFFER(
+		wxPaintDC* dc
+	); 
+
+	const void COMMAND_LINE_DRAW_BUFFER_SETUP_DC(
+		wxPaintDC* dc
+	); 
+
+	const wxPoint COMMAND_LINE_DRAW_GET_STARTING_POSITION();
+	const wxPoint COMMAND_LINE_DRAW_GET_FINAL_POSITION();
+
+	const wxSize COMMAND_LINE_DRAW_GET_SIZE();
+
 	// [ _VERTICAL_SLIDER ] 
 	void VERTICAL_SLIDER_DRAW(
 		wxPaintEvent& evt
@@ -178,6 +229,13 @@ private:
 	// 
 	// [ HANDLE ]  
 	//
+
+	// [ _COMMAND_LINE ] 
+	const std::vector<std::string> COMMAND_LINE_HANDLE_FORMAT_BUFFER(
+		wxPaintDC* dc, const std::vector<std::string>& BUFFER, const int& MAXIMAL_INT
+	);
+
+	// [ _HANDLE ? ]
 	const void HANDLE_UPDATE(); 
 
 	void HANDLE_RESIZE(
@@ -211,6 +269,8 @@ private:
 		const int& SCROL
 	);
 
+	const float VERTICAL_SLIDER_HANDLE_GET_SCROLL_PROCENTAGE();
+
 	const int VERTICAL_SLIDER_HANDLE_GET_MAX_SCROLL();
 
 	// [ _COMMANDS ] 
@@ -223,6 +283,22 @@ private:
 	// 
 	// [ VARIABLES ] 
 	// 
+
+	// [ _COMMAND_LINE ] 
+	std::vector<std::string> COMMAND_LINE_ORIGINAL_BUFFER = { "First lineaaaaaaaaaaaaaaaaaaaaaaa12334 lniggs'errrrssssssssssssssss niggers niasdasdasdjsa END", "Second Line" };
+	std::vector<std::string> COMMAND_LINE_FORMATED_BUFFER;
+	
+	std::vector<int> COMMAND_LINE_CURSOR_AT = { 0, 0 };
+	
+	wxColor COMMAND_LINE_DEFAULT_COLOR;
+
+	std::string COMMAND_LINE_FONT_FACENAME; 
+	int COMMAND_LINE_FONT_SIZE;
+
+	int COMMAND_LINE_DIFFERENCE_BETWEEN_LINES;
+	wxPoint COMMAND_LINE_DIFFERENCE_BETWEEN_EDGES;
+
+	int COMMAND_LINE_BUFFER_LINE_HEIGHT;
 
 	// [ _VERTICAL_SLIDER ] 
 	int VERTICAL_SLIDER_RESERVED_SPACE; 

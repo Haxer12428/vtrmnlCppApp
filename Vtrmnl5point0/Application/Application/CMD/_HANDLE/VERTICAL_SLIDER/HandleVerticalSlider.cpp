@@ -81,3 +81,10 @@ void Cmd::VERTICAL_SLIDER_HANDLE_MOUSEWHEEL_INTERACTION(
 	
 	this->FORCE_UPDATE = true; evt.Skip();
 }
+
+const float Cmd::VERTICAL_SLIDER_HANDLE_GET_SCROLL_PROCENTAGE() {
+	const int MAX_SCROLL = this->VERTICAL_SLIDER_HANDLE_GET_MAX_SCROLL();
+	const int SCROLL = this->VERTICAL_SLIDER_SCROLL;
+
+	return float(float(SCROLL) / float(MAX_SCROLL));
+}
