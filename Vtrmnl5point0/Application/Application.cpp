@@ -1,42 +1,27 @@
-#include <wx/wx.h>
-#include "../Engine/Engine.h"
-#include "Application/CMD/Cmd.h"
+#define CPPHTTPLIB_OPENSSL_SUPPORT
+
+#include "wx/wx.h"
+#include "frame/frame.h"
+#include "graph/graph.h"
+#include "../engine/engine.h"
 
 
-int _STATUS()
-{
-	return Engine::CPU::GetUsage();
-}
-
-int _MEMSTATUS()
-{
-	return Engine::Memory().GetUsed(Engine::Memory::MB);
-}
-
-
-class Application : public wxApp {
-public:
-
-	bool OnInit() {
-		//Engine::Config* Cfg = new Engine::Config("C:/Vtrmnl/5/config.txt");
-		//wxLogMessage(Cfg->Desire("$Font", "Hack").c_str());
-		//wxLogMessage(std::to_string(Engine::String::Find("asTHIS nigger", "THIS")).c_str());
-
-
+class application : public wxApp {
+	virtual bool OnInit() {
 
 		try {
-			Cmd* Cl = new Cmd(
-				"CL.UI Application", "C:\\Vtrmnl\\5"
-			);
+			wxFrame* mainframe = new frame("Vtrmnl5");
 		}
 		catch (
-			const std::exception& /*ex*/
+			const std::exception& ex
 			) {
-			wxLogMessage("Critical _SETUP error occured, please restart application. \n(?) This might be caused by application overriding corrupted config.cfg");
+			wxLogMessage(
+				(std::string("Unknown error thrown, please restart application.\n(?) ") + ex.what()).c_str()
+			);
 		}
 
 		return true; 
 	}
 };
 
-wxIMPLEMENT_APP(Application);
+wxIMPLEMENT_APP(application);

@@ -1,208 +1,186 @@
 #pragma once
-#include <windows.h>
-#include <iostream>
-#include <string>
-#include <filesystem>
-#include <vector>
-#include <Psapi.h>
-#include <TlHelp32.h>
-#include <codecvt>
 #include <fstream>
+#include <filesystem>
+#include <windows.h>
+#include <Psapi.h>
 
-namespace Engine
-{
-	class Debug
-	{
+namespace engine {
+	class vector {
 	public:
-		enum TYPES
-		{
-			FAIL = 0,
-			WARNING = 1, 
-			MESSAGE = 2
-		};
+		static const std::string transform_string_vector_to_string(
+			const std::vector<std::string>& buffer
+		);
 
-		struct Object
-		{
-		public:
-			Object(
-				const std::string& Message, Engine::Debug::TYPES Type
-			) : Message(Message), Type(Type) {
+		static const std::vector<std::string> find_in_phrases(
+			const std::string& str, const std::string& phrases
+		);
 
-			}
-
-			const std::string& What() {
-				return this->Message;
-			}
-
-			const Engine::Debug::TYPES GetType() {
-				return this->Type;
-			}
-
-		private:
-			const std::string Message; const Engine::Debug::TYPES Type; 
-		};
+		static const std::vector<int> transform_string_vector_to_int_vector(
+			const std::vector<std::string>& buffer
+		);
 	};
 
-	class String
-	{
+	class process {
 	public:
+		process(); 
 
-		static const size_t Find(
-			const std::string& _STR, const std::string& _FIND
+		const bool find_by_pid(
+			const DWORD& pid
+		);
+
+		const bool find_by_name(
+			const std::string& name
 		); 
 
-		static const std::vector<std::string> GetVector(
-			const std::string& _STR
-		);
-	};
+		const HANDLE get_process() const;
 
-	class Process
-	{
-	public:
-		Process();
-
-		void FindPID(
-			const DWORD& PID
-		);
-
-		void FindName(
-			const std::string& Name
-		);
-
-		HANDLE GetProcessHandle();
+		const bool open_process();
+		const bool close_process(); 
+		
 
 	private:
-
-		HANDLE PROCESS_HANDLE;
-		DWORD PID; 
+		DWORD process_id; 
+		HANDLE process_handle; 
 	};
 
-	class Vector
+	class memory : engine::process
 	{
 	public:
-		static const std::vector<int> TransformStringToInt(
-			std::vector<std::string> _VECTOR
-		) {
-			std::vector<int> _TRANSFORMED; 
+		memory(
+			engine::process process
+		); 
 
-			for (
-				std::string _STR : _VECTOR
-				) _TRANSFORMED.push_back(std::stoi(_STR));
+		enum format
+		{
+			B = 1, 
+			KB = 1024,
+			MB = 1024 * 1024
+		};
 
-			return _TRANSFORMED;
-		}
+		const double get_usage(
+			engine::memory::format format
+		);
 
-		template<typename T> static const size_t Find(
-			std::vector<T> _VECTOR, T _PARAM
-		) {
-			const size_t _AT = -1; 
+	private:
+		
+	};
 
-			for (
-				size_t Iterator = 0; Iterator < _VECTOR.size(); Iterator++ 
+	class processor {
+	public:
+
+		static const double get_usage() {
+			FILETIME idleTime, kernelTime, userTime;
+
+			if (
+				!GetSystemTimes(&idleTime, &kernelTime, &userTime)
 				) {
-				if (
-					_VECTOR[Iterator] == _PARAM
-					) return Iterator;
+				return -1.0;
 			}
 
-			return _AT; 
+			static unsigned long long _previousTotalTicks = 0;
+			static unsigned long long _previousIdleTicks = 0;
+
+			unsigned long long idle = (
+				(unsigned long long)idleTime.dwHighDateTime << 32
+				) | idleTime.dwLowDateTime;
+
+			unsigned long long kernel = (
+				(unsigned long long)kernelTime.dwHighDateTime << 32
+				) | kernelTime.dwLowDateTime;
+
+			unsigned long long user = (
+				(unsigned long long)userTime.dwHighDateTime << 32
+				) | userTime.dwLowDateTime;
+
+			unsigned long long totalTicks = (
+				kernel + user
+				);
+
+			unsigned long long totalTicksSinceLastTime = (
+				totalTicks - _previousTotalTicks
+				);
+
+			unsigned long long idleTicksSinceLastTime = (
+				idle - _previousIdleTicks
+				);
+
+			double Result = 1.0 - (
+				(double)idleTicksSinceLastTime
+				) / totalTicksSinceLastTime;
+
+			_previousTotalTicks = totalTicks;
+			_previousIdleTicks = idle;
+
+			return Result * 100.0;
 		}
 	};
 
-	class Memory
-	{
+	class file {
 	public:
-		enum FORMAT
-		{
-			B = 1,
-			KB = 1024,
-			MB = (1024 * 1024),
-			GB = (1024 * 1024 * 1024)
-		};
+		file(
+			const std::filesystem::path& file_path
+		); 
 
-		Memory();
+		const bool write_vector_buffer(
+			const std::vector<std::string>& buffer
+		) const; 
 
-		const double GetAllocated(
-			Engine::Memory::FORMAT _Format
-		);
+		const void set_path(
+			const std::filesystem::path& file_path
+		); 
 
-		const double GetUsed(
-			Engine::Memory::FORMAT _Format
-		);
+		const std::filesystem::path get_path() const; 
 
-		const double GetFree(
-			Engine::Memory::FORMAT _Format
-		);
-
-		std::string GetProcessWithHighestMemoryConsumption(
-			std::vector<std::string> _SKIP = std::vector<std::string>{}
-		);
-
-		class ofProcess : public Engine::Process
-		{
-		public:
-			ofProcess(
-				Engine::Process Process
-			); 
-
-			const double Usage(
-				Engine::Memory::FORMAT _Format
-			);
-
-		private:
-
-		};
+		const std::vector<std::string> get_buffer_in_vector(); 
 
 	private:
-		void Update(); 
-
-		MEMORYSTATUSEX MemoryStatus;
+		std::filesystem::path file_path; 
 	};
 
-	namespace CPU
-	{
-		const double GetUsage();
-	};
-
-
-	namespace NET
-	{
-		class GetBuffer
-		{
-		public:
-			GetBuffer(
-				const std::string& URL
-			);
-
-		private:
-			std::vector<std::string> Obtain(
-				std::filesystem::path Path
-			);
-
-			std::filesystem::path ObtainPath();
-
-			const std::string URL;
-		};
-	};
-
-	class Config
-	{
+	class string {
 	public:
-		Config(
-			const std::filesystem::path& _PATH
+		string(
+			const std::string& str
+		); 
+
+		const size_t find_phrase(
+			const std::string& phrase
+		) const; 
+
+		const void set_string(
+			const std::string& str
 		);
 
-		const std::string Desire(
-			const std::string& _NAME, const std::string& _DEFAULTvalue
-		);
+		const std::vector<std::string> get_vector() const; 
 
-		std::filesystem::path GetPath() const {
-			return this->_PATH;
-		}
+		const std::string get_string() const; 
 
 	private:
-		void HandleFile();
-
-		std::filesystem::path _PATH; 
+		std::string str; 
 	};
-}
+
+	class config {
+	public:
+		config(
+			const std::filesystem::path& file_path
+		);
+
+		std::filesystem::path get_path() const;
+
+		const std::string desire(
+			const std::string& name, const std::string& default_value
+		) const;
+
+	private:
+		const bool file_available() const; 
+
+		const bool make_file() const; 
+
+		const bool make_desire(
+			const std::string& name, const std::string& value
+		) const; 
+
+		std::filesystem::path file_path; 
+	};
+
+};

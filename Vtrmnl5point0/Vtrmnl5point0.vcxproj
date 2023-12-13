@@ -18,6 +18,52 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="application\application.cpp" />
+    <ClCompile Include="application\frame\assigned_function\assigned_function.cpp" />
+    <ClCompile Include="application\frame\assigned_function\assigned_function_struct.cpp" />
+    <ClCompile Include="application\frame\draw\draw.cpp" />
+    <ClCompile Include="application\frame\draw\frame_draw_background.cpp" />
+    <ClCompile Include="application\frame\handle\handle_resize.cpp" />
+    <ClCompile Include="application\frame\mouse_interactive_panel\draw\draw_mouse_interactive_panel.cpp" />
+    <ClCompile Include="application\frame\mouse_interactive_panel\handle\handle_mouse_interface_panel.cpp" />
+    <ClCompile Include="application\frame\mouse_interactive_panel\setup\setup_mouse_interactive_panel.cpp" />
+    <ClCompile Include="application\frame\mouse_interactive_panel\setup\setup_mouse_interactive_panel_assigned_functions.cpp" />
+    <ClCompile Include="application\frame\setup\frame_binds.cpp" />
+    <ClCompile Include="application\frame\setup\frame_constructor.cpp" />
+    <ClCompile Include="application\frame\setup\frame_config.cpp" />
+    <ClCompile Include="application\frame\setup\frame_draw.cpp" />
+    <ClCompile Include="application\frame\setup\frame_style.cpp" />
+    <ClCompile Include="application\frame\vertical_scrollbar\draw\background\draw_vertical_slider_background.cpp" />
+    <ClCompile Include="application\frame\vertical_scrollbar\draw\background\draw_vertical_slider_background_help.cpp" />
+    <ClCompile Include="application\frame\vertical_scrollbar\draw\draw_vertical_scrollbar.cpp" />
+    <ClCompile Include="application\frame\vertical_scrollbar\setup\setup_vertical_scrollbar.cpp" />
+    <ClCompile Include="application\graph\draw\graph_draw_background.cpp" />
+    <ClCompile Include="application\graph\draw\graph_draw_buffer.cpp" />
+    <ClCompile Include="application\graph\draw\graph_draw_info_panel.cpp" />
+    <ClCompile Include="application\graph\draw\grap_draw.cpp" />
+    <ClCompile Include="application\graph\handle\graph_handle.cpp" />
+    <ClCompile Include="application\graph\public\graph_public.cpp" />
+    <ClCompile Include="application\graph\setup\graph_constructor.cpp" />
+    <ClCompile Include="application\graph\setup\graph_setup_binds.cpp" />
+    <ClCompile Include="engine\config\config_constructor.cpp" />
+    <ClCompile Include="engine\config\config_private.cpp" />
+    <ClCompile Include="engine\config\config_public.cpp" />
+    <ClCompile Include="engine\file\file_constructor.cpp" />
+    <ClCompile Include="engine\file\file_public.cpp" />
+    <ClCompile Include="engine\memory\memory_constructor.cpp" />
+    <ClCompile Include="engine\memory\memory_public.cpp" />
+    <ClCompile Include="engine\process\process_constructor.cpp" />
+    <ClCompile Include="engine\process\process_public.cpp" />
+    <ClCompile Include="engine\string\string_constructor.cpp" />
+    <ClCompile Include="engine\string\string_public.cpp" />
+    <ClCompile Include="engine\vector\vector_public.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="application\frame\frame.h" />
+    <ClInclude Include="application\graph\graph.h" />
+    <ClInclude Include="engine\engine.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -142,57 +188,6 @@
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_x64_lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Application\Application.cpp" />
-    <ClCompile Include="Application\Application\CMD\Cmd.cpp" />
-    <ClCompile Include="Application\Application\CMD\_COMMAND\COMMAND_MEMORY_USAGE.cpp" />
-    <ClCompile Include="Application\Application\CMD\_COMMAND\COMMAND_REFRESH.cpp" />
-    <ClCompile Include="Application\Application\CMD\_COMMAND\COMMAND_SETTINGS.cpp" />
-    <ClCompile Include="Application\Application\CMD\_DRAW\COMMAND_LINE\DrawCommandLine.cpp" />
-    <ClCompile Include="Application\Application\CMD\_DRAW\COMMAND_LINE\DrawCommandLineBuffer.cpp" />
-    <ClCompile Include="Application\Application\CMD\_DRAW\VERTICAL_SLIDER\DrawVerticalSlider.cpp" />
-    <ClCompile Include="Application\Application\CMD\_DRAW\VERTICAL_SLIDER\DrawVerticalSliderBackground.cpp" />
-    <ClCompile Include="Application\Application\CMD\_DRAW\VERTICAL_SLIDER\DrawVerticalSliderMain.cpp" />
-    <ClCompile Include="Application\Application\CMD\_HANDLE\COMMANDS\HandleCommands.cpp" />
-    <ClCompile Include="Application\Application\CMD\_HANDLE\COMMAND_LINE\HandleCommandLine.cpp" />
-    <ClCompile Include="Application\Application\CMD\_HANDLE\HandleResize.cpp" />
-    <ClCompile Include="Application\Application\CMD\_HANDLE\HandleUpdate.cpp" />
-    <ClCompile Include="Application\Application\CMD\_HANDLE\VERTICAL_SLIDER\HandleVerticalSlider.cpp" />
-    <ClCompile Include="Application\Application\CMD\_PUBLIC\HandlePUBLICCommands.cpp" />
-    <ClCompile Include="Application\Application\CMD\_DRAW\MOUSE_INTERFACE\DrawBackground.cpp" />
-    <ClCompile Include="Application\Application\CMD\_DRAW\MOUSE_INTERFACE\DrawInterface.cpp" />
-    <ClCompile Include="Application\Application\CMD\_DRAW\MOUSE_INTERFACE\DrawText.cpp" />
-    <ClCompile Include="Application\Application\CMD\_HANDLE\MOUSE_INTERFACE\MouseInteraction.cpp" />
-    <ClCompile Include="Application\Application\CMD\_HANDLE\MOUSE\MouseHandle.cpp" />
-    <ClCompile Include="Application\Application\CMD\_SETUP\HandleBinds.cpp" />
-    <ClCompile Include="Application\Application\CMD\_SETUP\HandleSetupCommandLine.cpp" />
-    <ClCompile Include="Application\Application\CMD\_SETUP\HandleSETUPCommands.cpp" />
-    <ClCompile Include="Application\Application\CMD\_SETUP\HandleConfig.cpp" />
-    <ClCompile Include="Application\Application\CMD\_SETUP\HandleMOUSE_INTERFACE.cpp" />
-    <ClCompile Include="Application\Application\CMD\_SETUP\HandleSetupVERTICAL_SLIDER.cpp" />
-    <ClCompile Include="Application\Application\CMD\_SETUP\HandleSize.cpp" />
-    <ClCompile Include="Application\Application\CMD\_SETUP\HandleStyle.cpp" />
-    <ClCompile Include="Application\Application\CMD\_SETUP\HandleVariables.cpp" />
-    <ClCompile Include="Application\Render\Graph\Buffer.cpp" />
-    <ClCompile Include="Application\Render\Graph\Configuration.cpp" />
-    <ClCompile Include="Application\Render\Graph\Graph.cpp" />
-    <ClCompile Include="Application\Render\Graph\GraphHelp.cpp" />
-    <ClCompile Include="Application\Render\Graph\OnClose.cpp" />
-    <ClCompile Include="Application\Render\Graph\PublicGraph.cpp" />
-    <ClCompile Include="Application\Render\Graph\RenderGraph.cpp" />
-    <ClCompile Include="Engine\Config\Config.cpp" />
-    <ClCompile Include="Engine\CPU\GetUsage.cpp" />
-    <ClCompile Include="Engine\Memory\Memory.cpp" />
-    <ClCompile Include="Engine\Memory\ofProcess.cpp" />
-    <ClCompile Include="Engine\NET\GetBuffer.cpp" />
-    <ClCompile Include="Engine\Process\Process.cpp" />
-    <ClCompile Include="Engine\String\String.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Application\Application\CMD\Cmd.h" />
-    <ClInclude Include="Application\Render\Render.h" />
-    <ClInclude Include="Engine\Engine.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
