@@ -132,6 +132,30 @@
     <ClCompile Include="application\frame\handle\handle_resize.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="application\frame\vertical_scrollbar\draw\movable\draw_vertical_scollbar_movable.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="application\frame\vertical_scrollbar\draw\movable\draw_vertical_scrollbar_movable_help.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="application\frame\vertical_scrollbar\handle\handle_vertical_scrollbar_interaction.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="application\frame\command_line\setup\setup_command_line.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="application\frame\command_line\draw\draw_command_line.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="application\frame\command_line\draw\text\draw_command_line_text.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="application\frame\command_line\draw\text\draw_command_line_text_help.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="application\frame\vertical_scrollbar\handle\handle_vertical_scrollbar_resize.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\frame\frame.h">

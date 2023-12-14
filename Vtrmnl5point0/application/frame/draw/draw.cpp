@@ -8,5 +8,6 @@ void frame::draw(
 	this->frame_draw_background(paint); 
 	this->draw_mouse_interactive_panel_main(paint);
 	this->draw_vertical_scrollbar(paint);
+	this->draw_command_line(paint);
 
 }

@@ -22,6 +22,10 @@
     <ClCompile Include="application\application.cpp" />
     <ClCompile Include="application\frame\assigned_function\assigned_function.cpp" />
     <ClCompile Include="application\frame\assigned_function\assigned_function_struct.cpp" />
+    <ClCompile Include="application\frame\command_line\draw\draw_command_line.cpp" />
+    <ClCompile Include="application\frame\command_line\draw\text\draw_command_line_text.cpp" />
+    <ClCompile Include="application\frame\command_line\draw\text\draw_command_line_text_help.cpp" />
+    <ClCompile Include="application\frame\command_line\setup\setup_command_line.cpp" />
     <ClCompile Include="application\frame\draw\draw.cpp" />
     <ClCompile Include="application\frame\draw\frame_draw_background.cpp" />
     <ClCompile Include="application\frame\handle\handle_resize.cpp" />
@@ -37,6 +41,10 @@
     <ClCompile Include="application\frame\vertical_scrollbar\draw\background\draw_vertical_slider_background.cpp" />
     <ClCompile Include="application\frame\vertical_scrollbar\draw\background\draw_vertical_slider_background_help.cpp" />
     <ClCompile Include="application\frame\vertical_scrollbar\draw\draw_vertical_scrollbar.cpp" />
+    <ClCompile Include="application\frame\vertical_scrollbar\draw\movable\draw_vertical_scollbar_movable.cpp" />
+    <ClCompile Include="application\frame\vertical_scrollbar\draw\movable\draw_vertical_scrollbar_movable_help.cpp" />
+    <ClCompile Include="application\frame\vertical_scrollbar\handle\handle_vertical_scrollbar_interaction.cpp" />
+    <ClCompile Include="application\frame\vertical_scrollbar\handle\handle_vertical_scrollbar_resize.cpp" />
     <ClCompile Include="application\frame\vertical_scrollbar\setup\setup_vertical_scrollbar.cpp" />
     <ClCompile Include="application\graph\draw\graph_draw_background.cpp" />
     <ClCompile Include="application\graph\draw\graph_draw_buffer.cpp" />
