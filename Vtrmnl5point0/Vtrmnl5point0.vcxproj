@@ -25,6 +25,7 @@
     <ClCompile Include="application\frame\command_line\draw\draw_command_line.cpp" />
     <ClCompile Include="application\frame\command_line\draw\text\draw_command_line_text.cpp" />
     <ClCompile Include="application\frame\command_line\draw\text\draw_command_line_text_help.cpp" />
+    <ClCompile Include="application\frame\command_line\handle\handle_command_line_buffer.cpp" />
     <ClCompile Include="application\frame\command_line\setup\setup_command_line.cpp" />
     <ClCompile Include="application\frame\draw\draw.cpp" />
     <ClCompile Include="application\frame\draw\frame_draw_background.cpp" />

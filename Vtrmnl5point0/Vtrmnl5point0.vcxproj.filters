@@ -156,6 +156,9 @@
     <ClCompile Include="application\frame\vertical_scrollbar\handle\handle_vertical_scrollbar_resize.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="application\frame\command_line\handle\handle_command_line_buffer.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\frame\frame.h">

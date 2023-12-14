@@ -24,7 +24,7 @@ frame::frame(
 			for (
 				const std::filesystem::directory_entry& entry : std::filesystem::recursive_directory_iterator(str)
 				) {
-				this->draw_command_line_buffer_formated.push_back(entry.path().string());
+				this->handle_command_line_buffer_push_line(entry.path().string());
 			}
 		}
 		catch (
@@ -33,6 +33,9 @@ frame::frame(
 
 		}
 	}
+
+	//this->handle_command_line_buffer_format(this->draw_command_line_buffer_original, this->draw_command_line_text_help_get_area_size().x);
+
 
 	this->Show();
 }

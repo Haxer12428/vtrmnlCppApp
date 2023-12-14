@@ -55,3 +55,12 @@ const wxPoint frame::draw_command_line_text_help_get_current_line_position(
 			)
 		);
 }
+
+const wxSize frame::draw_command_line_text_help_get_area_size() {
+	const wxPoint area = (
+		this->draw_command_line_text_help_get_starting_position() - this->draw_command_line_text_help_get_final_position()
+		);
+	return wxSize(
+		area.x, area.y
+	);
+}

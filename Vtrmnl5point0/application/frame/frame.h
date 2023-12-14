@@ -47,8 +47,13 @@ public:
 		const bool assigned_function_find_and_call(
 			const std::string& name, const std::vector<std::string>& arguments
 		); 
+	// [ COMMAND_LINE ] 
+		// [ BUFFER ] 
+		const void handle_command_line_buffer_push_line(
+			const std::string& buffer
+		); 
 
-	// ... 
+	// ...
 
 private:
 	// [ 
@@ -114,6 +119,8 @@ private:
 					wxAutoBufferedPaintDC& dc, const int buffer_iterator 
 				); 
 
+				const wxSize draw_command_line_text_help_get_area_size();
+
 	// [ VERTICAL_SCROLLBAR ] 
 		// [ DRAW ] 
 			const void draw_vertical_scrollbar(
@@ -175,6 +182,11 @@ private:
 		void handle_resize(
 			wxSizeEvent& evt
 		); 
+	// [ COMMAND_LINE ] 
+		// [ BUFFER ] 
+			const void handle_command_line_buffer_format(
+				const std::vector<std::string>& buffer, const int &maximal_lenght_x
+			);
 
 	// [ MOUSE_INTERACTIVE_PANEL ] 
 		// [ INTERACTION ] 
