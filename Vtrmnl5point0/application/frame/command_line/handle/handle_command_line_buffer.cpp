@@ -60,7 +60,5 @@ const void frame::handle_command_line_buffer_push_line(
 	this->draw_command_line_buffer_original.push_back(
 		buffer
 	); 
-
-	this->handle_command_line_buffer_format(this->draw_command_line_buffer_original, this->draw_command_line_text_help_get_area_size().x);
 	this->Refresh(); 
 }

@@ -119,6 +119,7 @@ void frame::handle_command_line_buffer_input(
 			key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER 
 			) {
 			this->handle_command_line_buffer_input_awake_assigned_function(this->handle_command_line_buffer_input_cache);
+			this->handle_command_line_buffer_format(this->draw_command_line_buffer_original, this->draw_command_line_text_help_get_area_size().x);
 
 			this->handle_command_line_buffer_input_cache.resize(0);
 

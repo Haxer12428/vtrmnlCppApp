@@ -21,8 +21,10 @@ const bool frame::assigned_function::call(
 		(obj->*(this->function))(arguments);
 	}
 	catch (
-		const std::exception /*ex*/
+		const std::exception ex
 		) {
+		obj->handle_command_line_buffer_push_line(" error: " + std::string(ex.what()));
+
 		return false; 
 	}
 	return true; 
