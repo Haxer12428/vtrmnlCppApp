@@ -20,4 +20,6 @@ const void frame::setup_command_line() {
 	this->draw_command_line_text_push_y = command_line_text_push[1];
 
 	this->draw_command_line_text_spacing = std::stoi(this->config->desire("$draw_command_line_text_spacing", "10"));
+
+	this->setup_command_line_assigned_functions();
 }

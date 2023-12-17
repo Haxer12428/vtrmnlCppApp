@@ -5,20 +5,7 @@
 #include <Psapi.h>
 
 namespace engine {
-	class vector {
-	public:
-		static const std::string transform_string_vector_to_string(
-			const std::vector<std::string>& buffer
-		);
 
-		static const std::vector<std::string> find_in_phrases(
-			const std::string& str, const std::string& phrases
-		);
-
-		static const std::vector<int> transform_string_vector_to_int_vector(
-			const std::vector<std::string>& buffer
-		);
-	};
 
 	class process {
 	public:
@@ -183,4 +170,44 @@ namespace engine {
 		std::filesystem::path file_path; 
 	};
 
+	class vector {
+	public:
+		static const std::string transform_string_vector_to_string(
+			const std::vector<std::string>& buffer
+		);
+
+		static const std::vector<std::string> find_in_phrases(
+			const std::string& str, const std::string& phrases
+		);
+
+		static const std::vector<int> transform_string_vector_to_int_vector(
+			const std::vector<std::string>& buffer
+		);
+
+		template<typename T> size_t find_value(
+			const std::vector<T>& buffer, T phrase
+		) {
+			for (
+				size_t iterator = 0; iterator < buffer.size(); iterator++
+				) {
+				if (
+					buffer[iterator] == phrase
+					) return iterator;
+			}
+			return -1;
+		}
+
+		const size_t find_phrase(
+			const std::vector<std::string>& buffer, std::string phrase
+		) {
+			for (
+				size_t iterator = 0; iterator < buffer.size(); iterator++
+				) {
+				if (
+					engine::string(buffer[iterator]).find_phrase(phrase) != std::string::npos
+					) return iterator;
+			}
+			return -1;
+		}
+	};
 };

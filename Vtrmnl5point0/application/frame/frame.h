@@ -16,6 +16,13 @@ public:
 	//   STRUCT's
 	// ] 
 
+	// [ COMMAND_LINE_BUFFER_INPUT ] 
+
+	enum command_line_buffer_input_mode {
+		write = 0, 
+		read = 1
+	};
+
 	// [ ASSIGNED_FUNCTION ] 
 
 		const std::vector<std::string> argument_empty = {};
@@ -80,6 +87,9 @@ private:
 				const void setup_vertical_scrollbar(); 
 			// [ COMMAND_LINE ] 
 				const void setup_command_line(); 
+
+				// [ ASSIGNED_FUNCTIONS ] 
+					const void setup_command_line_assigned_functions(); 
 		//... 
 
 	// [ BINDS ] 
@@ -182,11 +192,31 @@ private:
 		void handle_resize(
 			wxSizeEvent& evt
 		); 
+
+		void handle_resize_after(
+			wxIdleEvent& evt
+		);
 	// [ COMMAND_LINE ] 
 		// [ BUFFER ] 
 			const void handle_command_line_buffer_format(
 				const std::vector<std::string>& buffer, const int &maximal_lenght_x
 			);
+		// [ INPUT ] 
+			frame::command_line_buffer_input_mode handle_command_line_buffer_input_mode = frame::command_line_buffer_input_mode::write;
+
+			std::string handle_command_line_buffer_input_cache = ""; // empty str 
+
+			void handle_command_line_buffer_input(
+				wxKeyEvent& evt
+			);
+
+			const void handle_command_line_buffer_input_awake_assigned_function(
+				const std::string& input
+			); 
+
+			const std::vector<std::string> handle_command_line_buffer_input_help_get_arguments(
+				const std::string& input
+			) const; 
 
 	// [ MOUSE_INTERACTIVE_PANEL ] 
 		// [ INTERACTION ] 
@@ -212,6 +242,8 @@ private:
 	//   VARIABLES 
 	// ]
 
+	// [ HANDLE_RESIZE ] 
+		bool handle_resize_after_resizing = true; 
 	// [ VERTICAL_SCROLLBAR ] 
 		// [ BACKGROUND ] 
 			// [ SPACING ] 
@@ -280,5 +312,16 @@ private:
 				void *assigned_function_mouse_interactive_panel_memory_usage(
 					const std::vector<std::string>&
 				);
+			// [ COMMAND_LINE_GET_FILES ] 
+				const void assigned_function_command_line_get_files_recursive(
+					const std::filesystem::path& path
+				); 
 
+				const void assigned_function_command_line_get_files_non_recursive(
+					const std::filesystem::path& path
+				); 
+
+				void* assgined_function_command_line_get_files(
+					const std::vector<std::string>& arguments 
+				);
 };

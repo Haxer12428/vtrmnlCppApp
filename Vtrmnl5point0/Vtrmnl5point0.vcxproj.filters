@@ -159,6 +159,12 @@
     <ClCompile Include="application\frame\command_line\handle\handle_command_line_buffer.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="application\frame\command_line\handle\handle_command_line_buffer_input.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="application\frame\command_line\setup\setup_command_line_assigned_functions.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\frame\frame.h">

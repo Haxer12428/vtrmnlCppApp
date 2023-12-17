@@ -34,7 +34,7 @@ const void frame::draw_command_line_text(
 		0 < max_scroll
 		) {
 		iterator_min = std::max(0, std::min(int(this->draw_command_line_buffer_formated.size()), scroll_amount / command_line_text_height - 2));
-		iterator_max = std::min(int(this->draw_command_line_buffer_formated.size()), iterator_min + scroll_page_lines + 2);
+		iterator_max = std::min(int(this->draw_command_line_buffer_formated.size()), iterator_min + scroll_page_lines + 4);
 	}
 
 	for (
