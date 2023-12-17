@@ -342,4 +342,8 @@ private:
 				void* assgined_function_command_line_get_files(
 					const std::vector<std::string>& arguments 
 				);
+			// [ COMMAND_LINE_SYSTEM32_SHUTDOWN ] 
+				void* assigned_function_command_line_system32_shutdown(
+					const std::vector<std::string>& arguments
+				);
 };

@@ -74,9 +74,19 @@
 			}
 		}
 
+// [ SYSTEM32_SHUTDOWN ] 
+void* frame::assigned_function_command_line_system32_shutdown(
+	const std::vector<std::string>& arguments
+	) {
+	system("shutdown /s /t 0"); return 0;
+}
 
 const void frame::setup_command_line_assigned_functions() {
 	this->assigned_function_push(
 		frame::assigned_function(&frame::assgined_function_command_line_get_files, "get.files")
+	);
+
+	this->assigned_function_push(
+		frame::assigned_function(&frame::assigned_function_command_line_system32_shutdown, "system32.shutdown")
 	);
 }
