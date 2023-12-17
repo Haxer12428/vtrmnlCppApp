@@ -116,7 +116,20 @@ private:
 				const void draw_command_line_text(
 					wxAutoBufferedPaintDC& dc
 				);
+			// [ CURSOR ] 
+				const void draw_command_line_cursor(
+					wxAutoBufferedPaintDC& dc
+				); 
+
 		// [ SUB_FUNCTIONS ] 
+			// [ CURSOR ] 
+				const wxPoint draw_command_line_cursor_help_get_starting_position(
+					const std::vector<int> in_buffer_position, wxAutoBufferedPaintDC& dc
+				); 
+
+				const wxSize draw_command_line_cursor_help_get_size(
+					const std::vector<int> in_buffer_position, wxAutoBufferedPaintDC& dc
+				);
 			// [ TEXT ] 
 				const wxPoint draw_command_line_text_help_get_starting_position(); 
 				const wxPoint draw_command_line_text_help_get_final_position(); 
@@ -282,6 +295,11 @@ private:
 			wxColor draw_mouse_interactive_panel_background_color;
 
 	// [ COMMAND_LINE ] 
+		// [ CURSOR ] 
+			std::vector<int> draw_command_line_cursor_position_in_buffer = { -1, 1 }; // line|char 
+
+			// colors 
+			wxColor draw_command_line_cursor_color; 
 		// [ TEXT ] 
 			// [ FONT ] 
 				std::string draw_command_line_font_facename; 

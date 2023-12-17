@@ -165,6 +165,12 @@
     <ClCompile Include="application\frame\command_line\setup\setup_command_line_assigned_functions.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="application\frame\command_line\draw\cursor\draw_command_line_cursor.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="application\frame\command_line\draw\cursor\draw_command_line_cursor_help.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\frame\frame.h">

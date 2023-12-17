@@ -21,5 +21,14 @@ const void frame::setup_command_line() {
 
 	this->draw_command_line_text_spacing = std::stoi(this->config->desire("$draw_command_line_text_spacing", "10"));
 
+	std::vector<int> command_line_cursor_color = engine::vector::transform_string_vector_to_int_vector(
+		engine::string(this->config->desire("$draw_command_line_cursor_color", "255, 255, 255, 10")).get_vector()
+	);
+
+	this->draw_command_line_cursor_color = wxColor(
+		command_line_cursor_color[0], command_line_cursor_color[1], command_line_cursor_color[2], command_line_cursor_color[3]
+	);
+
+
 	this->setup_command_line_assigned_functions();
 }

@@ -60,5 +60,10 @@ const void frame::handle_command_line_buffer_push_line(
 	this->draw_command_line_buffer_original.push_back(
 		buffer
 	); 
+
+	this->draw_command_line_cursor_position_in_buffer[0] = (
+		this->draw_command_line_buffer_formated.size() - 1
+		); 
+
 	this->Refresh(); 
 }

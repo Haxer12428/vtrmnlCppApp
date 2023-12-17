@@ -22,6 +22,8 @@
     <ClCompile Include="application\application.cpp" />
     <ClCompile Include="application\frame\assigned_function\assigned_function.cpp" />
     <ClCompile Include="application\frame\assigned_function\assigned_function_struct.cpp" />
+    <ClCompile Include="application\frame\command_line\draw\cursor\draw_command_line_cursor.cpp" />
+    <ClCompile Include="application\frame\command_line\draw\cursor\draw_command_line_cursor_help.cpp" />
     <ClCompile Include="application\frame\command_line\draw\draw_command_line.cpp" />
     <ClCompile Include="application\frame\command_line\draw\text\draw_command_line_text.cpp" />
     <ClCompile Include="application\frame\command_line\draw\text\draw_command_line_text_help.cpp" />

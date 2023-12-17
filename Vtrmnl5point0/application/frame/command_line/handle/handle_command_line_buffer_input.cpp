@@ -124,6 +124,9 @@ void frame::handle_command_line_buffer_input(
 			this->handle_command_line_buffer_input_cache.resize(0);
 
 			this->handle_command_line_buffer_push_line("");
+
+			this->draw_vertical_scrollbar_movable_scroll_amount = this->draw_vertical_scollbar_help_get_maximal_scroll();
+			this->Refresh();
 			return; 
 		}
 
@@ -131,6 +134,7 @@ void frame::handle_command_line_buffer_input(
 			this->draw_command_line_buffer_original.size() == 0
 			) {
 			this->handle_command_line_buffer_push_line(""); 
+
 		}
 
 		if (
@@ -149,6 +153,8 @@ void frame::handle_command_line_buffer_input(
 				].resize(
 					this->draw_command_line_buffer_original[this->draw_command_line_buffer_original.size() - 1].length() - 1
 				);
+
+				//this->draw_command_line_cursor_position_in_buffer[1] = this->draw_command_line_buffer_original[this->draw_command_line_buffer_original.size() - 1].length();
 			}
 
 			if (
@@ -160,9 +166,11 @@ void frame::handle_command_line_buffer_input(
 				);
 			}
 
+			this->draw_vertical_scrollbar_movable_scroll_amount = this->draw_vertical_scollbar_help_get_maximal_scroll();
 			this->handle_command_line_buffer_format(this->draw_command_line_buffer_original, this->draw_command_line_text_help_get_area_size().x);
 			this->Refresh();
 
+			this->draw_command_line_cursor_position_in_buffer[1] = this->draw_command_line_buffer_formated[this->draw_command_line_buffer_formated.size() - 1].length();
 			return; 
 		}
 
@@ -179,8 +187,11 @@ void frame::handle_command_line_buffer_input(
 			);
 
 		this->handle_command_line_buffer_format(this->draw_command_line_buffer_original, this->draw_command_line_text_help_get_area_size().x);
+		this->draw_vertical_scrollbar_movable_scroll_amount = this->draw_vertical_scollbar_help_get_maximal_scroll();
+		
 		this->Refresh();;
 
+		this->draw_command_line_cursor_position_in_buffer[1] = this->draw_command_line_buffer_formated[this->draw_command_line_buffer_formated.size() - 1].length();
 		return; 
 	}
 
