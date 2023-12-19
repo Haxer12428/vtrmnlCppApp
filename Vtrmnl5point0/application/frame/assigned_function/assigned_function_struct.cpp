@@ -23,7 +23,7 @@ const bool frame::assigned_function::call(
 	catch (
 		const std::exception ex
 		) {
-		obj->handle_command_line_buffer_push_line(" error: " + std::string(ex.what()));
+		obj->handle_command_line_buffer_push_line(" \aFF0000error: \aFFFFFF" + std::string(ex.what()));
 
 		return false; 
 	}

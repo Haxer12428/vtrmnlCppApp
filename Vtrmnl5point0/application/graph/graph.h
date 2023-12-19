@@ -19,6 +19,14 @@ public:
 	const int get_minimal_buffer();
 	const int get_average_buffer(); 
 
+	const void clear_buffer() {
+		this->buffer = {}; 
+	}
+
+	const void clear_max() {
+		this->maximal_value = 0;
+	}
+
 private:
 	//draw
 	void draw(

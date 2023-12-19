@@ -102,7 +102,7 @@ const void frame::handle_command_line_buffer_input_awake_assigned_function(
 		f_call_response
 		) return; 
 
-	this->handle_command_line_buffer_push_line(" error: Failed to find|call assigned function with given name.");
+	this->handle_command_line_buffer_push_line(" \aFF0000error: \aFFFFFFFailed to find|call assigned function with given name.");
 }
 
 void frame::handle_command_line_buffer_input(
@@ -119,11 +119,13 @@ void frame::handle_command_line_buffer_input(
 			key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER 
 			) {
 			this->handle_command_line_buffer_input_awake_assigned_function(this->handle_command_line_buffer_input_cache);
-			this->handle_command_line_buffer_format(this->draw_command_line_buffer_original, this->draw_command_line_text_help_get_area_size().x);
-
 			this->handle_command_line_buffer_input_cache.resize(0);
 
 			this->handle_command_line_buffer_push_line("");
+			this->handle_command_line_buffer_format(this->draw_command_line_buffer_original, this->draw_command_line_text_help_get_area_size().x);
+
+
+			this->draw_command_line_cursor_position_in_buffer[0] = this->draw_command_line_buffer_formated.size() - 1;
 
 			this->draw_vertical_scrollbar_movable_scroll_amount = this->draw_vertical_scollbar_help_get_maximal_scroll();
 			this->Refresh();
@@ -168,9 +170,9 @@ void frame::handle_command_line_buffer_input(
 
 			this->draw_vertical_scrollbar_movable_scroll_amount = this->draw_vertical_scollbar_help_get_maximal_scroll();
 			this->handle_command_line_buffer_format(this->draw_command_line_buffer_original, this->draw_command_line_text_help_get_area_size().x);
-			this->Refresh();
 
 			this->draw_command_line_cursor_position_in_buffer[1] = this->draw_command_line_buffer_formated[this->draw_command_line_buffer_formated.size() - 1].length();
+			this->Refresh();
 			return; 
 		}
 

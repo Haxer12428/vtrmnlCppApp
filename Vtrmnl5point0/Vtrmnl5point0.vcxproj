@@ -32,6 +32,7 @@
     <ClCompile Include="application\frame\command_line\setup\setup_command_line.cpp" />
     <ClCompile Include="application\frame\command_line\setup\setup_command_line_assigned_functions.cpp" />
     <ClCompile Include="application\frame\draw\draw.cpp" />
+    <ClCompile Include="application\frame\draw\draw_help.cpp" />
     <ClCompile Include="application\frame\draw\frame_draw_background.cpp" />
     <ClCompile Include="application\frame\handle\handle_resize.cpp" />
     <ClCompile Include="application\frame\mouse_interactive_panel\draw\draw_mouse_interactive_panel.cpp" />

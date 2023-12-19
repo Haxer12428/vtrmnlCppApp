@@ -16,6 +16,13 @@ public:
 	//   STRUCT's
 	// ] 
 
+	// [ COMMAND_LINE_DRAW_TEXT ] 
+
+	struct draw_command_line_colored_text {
+		std::string text;
+		std::string color_hex;
+	};
+
 	// [ COMMAND_LINE_BUFFER_INPUT ] 
 
 	enum command_line_buffer_input_mode {
@@ -103,6 +110,11 @@ private:
 		wxPaintEvent& evt
 	);
 
+	// [ HELP ] 
+	const wxColor draw_help_color_hex_to_rgb(
+		const std::string& clr_str
+	) const;
+
 	// [ BACKGROUND ] 
 		const void frame_draw_background(
 			wxAutoBufferedPaintDC& dc
@@ -143,6 +155,10 @@ private:
 				); 
 
 				const wxSize draw_command_line_text_help_get_area_size();
+
+				const std::vector<frame::draw_command_line_colored_text> draw_command_line_text_help_parse_text_with_color_from_string(
+					const wxString& buffer
+				) const;
 
 	// [ VERTICAL_SCROLLBAR ] 
 		// [ DRAW ] 
@@ -346,4 +362,12 @@ private:
 				void* assigned_function_command_line_system32_shutdown(
 					const std::vector<std::string>& arguments
 				);
+			// [ COMMAND_LINE_SYSTEM32_PROCESS_KILL ] 
+				void* assigned_function_comand_line_system32_process_memory_usage(
+					const std::vector<std::string>& arguments
+				);
+			// [ COMMAND_LINE_TERMINAL_ClEAR_BUFFER 
+				void* assigned_function_command_line_terminal_clear_buffer(
+					const std::vector<std::string>& arguments
+				); 
 };

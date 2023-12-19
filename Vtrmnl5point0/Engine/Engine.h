@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <windows.h>
 #include <Psapi.h>
+#include <TlHelp32.h>
 
 namespace engine {
 

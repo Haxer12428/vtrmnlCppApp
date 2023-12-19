@@ -64,3 +64,76 @@ const wxSize frame::draw_command_line_text_help_get_area_size() {
 		area.x, area.y
 	);
 }
+
+const std::vector<frame::draw_command_line_colored_text> frame::draw_command_line_text_help_parse_text_with_color_from_string(
+	const wxString& buffer
+) const {
+	std::vector<frame::draw_command_line_colored_text> parsed; 
+
+	std::string remaining_buffer = buffer.ToStdString(); 
+
+	const size_t hex_color_size = 6; 
+	const size_t escape_size = 2;
+	const size_t total_size = hex_color_size + escape_size;
+
+	const size_t first_escape_found = engine::string(remaining_buffer).find_phrase("\a");
+
+	if ( // no colors 
+		first_escape_found == std::string::npos
+		) {
+		frame::draw_command_line_colored_text segment; 
+
+		segment.text = remaining_buffer; 
+		segment.color_hex = "";
+
+		parsed.push_back(segment);
+
+		return parsed; 
+	}
+
+	if ( // first segment has no color 
+		first_escape_found != 0
+		) {
+		frame::draw_command_line_colored_text segment; 
+
+		segment.text = remaining_buffer.substr(0, first_escape_found); 
+		segment.color_hex = "";
+
+		parsed.push_back(segment);
+
+		remaining_buffer = remaining_buffer.substr(first_escape_found);
+	}
+
+	do {
+		// escapes 
+		const size_t escape_found = engine::string(remaining_buffer).find_phrase("\a");
+		const size_t next_escape_found = engine::string(remaining_buffer.substr(escape_found + escape_size)).find_phrase("\a");
+
+		// main's 
+		std::string current_segment_text = remaining_buffer;
+		const std::string current_segment_color_hex = remaining_buffer.substr(escape_size - 1, hex_color_size);
+
+		if ( // last line 
+			next_escape_found != std::string::npos
+			) {
+			current_segment_text.resize(next_escape_found + escape_size);
+		}
+
+		current_segment_text = current_segment_text.substr(total_size - 1);
+
+		// segment 
+		frame::draw_command_line_colored_text segment; 
+
+		segment.text = current_segment_text;
+		segment.color_hex = current_segment_color_hex; 
+
+		parsed.push_back(segment);
+
+		// handle buffer change 
+		remaining_buffer = remaining_buffer.substr(current_segment_text.length() + total_size - 1);
+	} while (
+		!remaining_buffer.empty()
+		);
+
+	return parsed; 
+}

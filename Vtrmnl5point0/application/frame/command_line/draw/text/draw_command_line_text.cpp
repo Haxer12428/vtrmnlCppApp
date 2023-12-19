@@ -44,13 +44,31 @@ const void frame::draw_command_line_text(
 			iterator
 		];
 
-		const wxPoint text_line_position = this->draw_command_line_text_help_get_current_line_position(
+		wxPoint text_line_position = this->draw_command_line_text_help_get_current_line_position(
 			paint, iterator
 		) + wxPoint(0, this->draw_command_line_text_help_get_starting_position().y);
 
-		paint.DrawText(
-			text_line, text_line_position
-		);
+		const std::vector<frame::draw_command_line_colored_text> colored_text_buffer = this->draw_command_line_text_help_parse_text_with_color_from_string(text_line);
+	
+		for (
+			const frame::draw_command_line_colored_text &segment : colored_text_buffer
+			) {
+			wxColor color_rgb = wxColor(255, 255, 255);
+			
+			if (
+				segment.color_hex != ""
+				) {
+				color_rgb = this->draw_help_color_hex_to_rgb(segment.color_hex);
+			};
+
+			paint.SetTextForeground(color_rgb);
+
+			paint.DrawText(
+				segment.text, text_line_position
+			);
+
+			text_line_position.x = text_line_position.x + paint.GetTextExtent(segment.text).x;
+		}
 	}
 	
 	paint.DestroyClippingRegion();
