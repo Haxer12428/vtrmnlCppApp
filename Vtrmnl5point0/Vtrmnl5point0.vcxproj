@@ -67,6 +67,7 @@
     <ClCompile Include="engine\file\file_public.cpp" />
     <ClCompile Include="engine\memory\memory_constructor.cpp" />
     <ClCompile Include="engine\memory\memory_public.cpp" />
+    <ClCompile Include="engine\process\current\process_current_public.cpp" />
     <ClCompile Include="engine\process\process_constructor.cpp" />
     <ClCompile Include="engine\process\process_public.cpp" />
     <ClCompile Include="engine\string\string_constructor.cpp" />

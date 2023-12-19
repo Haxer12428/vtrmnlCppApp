@@ -66,6 +66,7 @@ const bool engine::process::find_by_name(
 			this->process_id = (
 				process32_entry.th32ProcessID
 				);
+
 			return true; 
 		}
 	} while (
@@ -74,3 +75,4 @@ const bool engine::process::find_by_name(
 
 	return false;
 }
+

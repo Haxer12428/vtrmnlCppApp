@@ -25,6 +25,10 @@ namespace engine {
 		const bool open_process();
 		const bool close_process(); 
 		
+		class current {
+		public:
+			const bool is_administrator();
+		};
 
 	private:
 		DWORD process_id; 
@@ -48,7 +52,6 @@ namespace engine {
 		const double get_usage(
 			engine::memory::format format
 		);
-
 	private:
 		
 	};
