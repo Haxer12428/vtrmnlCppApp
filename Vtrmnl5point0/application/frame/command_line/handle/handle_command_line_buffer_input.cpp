@@ -114,6 +114,9 @@ void frame::handle_command_line_buffer_input(
 	if (
 		this->handle_command_line_buffer_input_mode == frame::command_line_buffer_input_mode::write
 		) {
+		if ( // windows key | skip
+			key_code == WXK_WINDOWS_LEFT || key_code == WXK_WINDOWS_RIGHT
+			) return; 
 
 		if (
 			key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER 
