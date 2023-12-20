@@ -7,6 +7,8 @@ frame::frame(
 	this->setup_config();
 	this->setup_binds();
 
+	this->handle_command_line_cursor_pulse();
+
 	SetBackgroundStyle(wxBG_STYLE_PAINT);
 
 	const bool as_administrator = engine::process::current().is_administrator();

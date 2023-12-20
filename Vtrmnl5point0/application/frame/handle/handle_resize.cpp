@@ -12,6 +12,7 @@ void frame::handle_resize_after(
 
 		this->Refresh();
 	}
+	evt.Skip();
 }
 
 void frame::handle_resize(

@@ -22,5 +22,9 @@ const void frame::draw_command_line_cursor(
 		wxSize(dc.GetTextExtent("W").x, dc.GetTextExtent("W").y)
 		); 
 
+	if (
+		this->draw_command_line_cursor_color.GetAlpha() == 0
+		) return; 
+
 	dc.DrawRectangle(starting_position, cursor_size);
 }

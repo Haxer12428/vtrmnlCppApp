@@ -47,11 +47,18 @@ public:
 
 			const std::string get_name() const; 
 
+			const std::string get_help() const; 
+			
+			const void set_help(
+				const std::string& str
+			); 
+
 		private:
 			void* (frame::*function)(
 				const std::vector<std::string>&
 				); 
 			const std::string name; 
+			std::string help;
 		};
 
 		const void assigned_function_push(
@@ -246,7 +253,8 @@ private:
 			const std::vector<std::string> handle_command_line_buffer_input_help_get_arguments(
 				const std::string& input
 			) const; 
-
+		// [ CURSOR ] 
+			void handle_command_line_cursor_pulse();
 	// [ MOUSE_INTERACTIVE_PANEL ] 
 		// [ INTERACTION ] 
 			void handle_mouse_interactive_panel_interaction(
@@ -314,6 +322,8 @@ private:
 		// [ CURSOR ] 
 			std::vector<int> draw_command_line_cursor_position_in_buffer = { -1, 1 }; // line|char 
 
+			std::chrono::high_resolution_clock::time_point handle_command_line_cursor_pulse_last_switch = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double, std::milli> handle_command_line_cursor_pulse_timeout = std::chrono::duration<double, std::milli>(500);
 			// colors 
 			wxColor draw_command_line_cursor_color; 
 		// [ TEXT ] 

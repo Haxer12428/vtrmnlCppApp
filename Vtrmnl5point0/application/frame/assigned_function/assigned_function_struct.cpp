@@ -10,6 +10,16 @@ frame::assigned_function::assigned_function(
 
 }
 
+const std::string frame::assigned_function::get_help() const {
+	return this->help;
+}
+
+const void frame::assigned_function::set_help(
+	const std::string& str
+) {
+	this->help = str;
+}
+
 const std::string frame::assigned_function::get_name() const {
 	return this->name; 
 }
